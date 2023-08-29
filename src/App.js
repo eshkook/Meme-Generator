@@ -14,7 +14,7 @@ export default function App() {
       <Header />
       {/* <Meme /> */}
       <Meme_2 />
-      <Form />
+      {/* <Form /> */}
     </div>
   )
 }
