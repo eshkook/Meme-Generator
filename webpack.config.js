@@ -14,6 +14,20 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      // Loader for images
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+      // Loaders for CSS
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       }
     ]
   },
@@ -22,5 +36,4 @@ module.exports = {
       directory: path.join(__dirname, 'public'),
     }
   }
-  
 };
