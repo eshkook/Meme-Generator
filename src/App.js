@@ -13,7 +13,7 @@ export default function App() {
     <div className="container">
       <Header />
       {/* <Meme /> */}
-      <Meme_2 />
+      {/* <Meme_2 /> */}
       {/* <Form /> */}
     </div>
   )

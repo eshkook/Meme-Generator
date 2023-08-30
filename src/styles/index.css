@@ -27,7 +27,7 @@ header {
   display: flex;
   align-items: center;
   /* justify-content: center; */
-  background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+  /* background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%); */
   padding: 20px;
   margin-bottom: -10px;
 }
