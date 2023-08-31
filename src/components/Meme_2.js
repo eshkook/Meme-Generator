@@ -24,7 +24,7 @@ export default function Meme_2() {
         [name]: value
       }))
     } else {
-      fetch("http://api.imgflip.com/get_memes").then(res => res.json()).then(data => { 
+      fetch("https://api.imgflip.com/get_memes").then(res => res.json()).then(data => { 
       setMemeState(prevMemeState => ({
         ...prevMemeState,
         "img": data.data.memes[Math.floor(Math.random()*data.data.memes.length)].url 
@@ -34,7 +34,7 @@ export default function Meme_2() {
   }
 
   useEffect(() => {
-    fetch("http://api.imgflip.com/get_memes").then(res => res.json()).then(data => { // to use async instead the 'then's watch youtube 9:46:00
+    fetch("https://api.imgflip.com/get_memes").then(res => res.json()).then(data => { // to use async instead the 'then's watch youtube 9:46:00
       setMemeState(prevMemeState => ({
         ...prevMemeState,
         img: data.data.memes[Math.floor(Math.random()*data.data.memes.length)].url
