@@ -37,7 +37,7 @@ export default function Meme_2() {
 
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes").then(res => res.json()).then(data => {  // to use async instead the 'then's watch youtube 9:46:00
-        const mappedMemes = data.data.memes.map(meme => meme.url)
+        const mappedMemes = data.data.memes.map(meme => meme.url) // this command will not be skipped until finished, unlike setting states
         setImagesState(mappedMemes)
         setMemeState(prevMemeState => ({
           ...prevMemeState,
