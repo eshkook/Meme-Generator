@@ -37,13 +37,12 @@ export default function Form() {
                   // obviously this function will be run after the first render of the website.
   
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  function watchWidth() {
+    setWindowWidth(window.innerWidth)
+  }
 
   useEffect(() => {
-    function watchWidth() {
-      setWindowWidth(window.innerWidth)
-    }
-
-    window.addEventListener("resize", watchWidth)
+        window.addEventListener("resize", watchWidth)
 
     return function() {
       window.removeEventListener("resize", watchWidth)
