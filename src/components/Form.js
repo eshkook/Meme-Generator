@@ -42,7 +42,7 @@ export default function Form() {
   }
 
   useEffect(() => {
-        window.addEventListener("resize", watchWidth)
+    window.addEventListener("resize", watchWidth)
 
     return function() {
       window.removeEventListener("resize", watchWidth)
