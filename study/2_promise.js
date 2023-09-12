@@ -5,17 +5,23 @@ stock = {
 
 let is_shop_open = true
 
-let order = (time, work) =>  {
+let order = (time, work) =>    {
     return new Promise( (resolve, reject) => {
         if (is_shop_open) {
             setTimeout(() => {
-                resolve(work)
+                resolve(work())
                              }, time)
         } else {
-            reject(console.log('shop is closed'))
+            reject('shop is closed')
                           }
                                               }
                       )
-                             }
+                               }
 
-order(2000, () => console.log(`${stock.fruits[0]} was selected`))                             
+order(2000, () => `${stock.fruits[0]} was selected`)       
+.then(console.log)
+.then( ()=> {
+    return order(1000, () => console.log('production has started'))  
+})
+.catch(console.log)
+
