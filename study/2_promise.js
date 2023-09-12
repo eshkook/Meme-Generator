@@ -8,7 +8,7 @@ let order = (time, work) =>    {
             reject(console.log('shop is closed or either fruit or topping doesn\'t exist')) // you can return the strin and print 
                                                                                             // it in 'catch' below instead of printing it here
                                                                                             // to do it just ommit the 'consloe.log()' (and don't write 'return')
-                          }
+                                                                                                         }
                                               }
                       )
                                }
@@ -36,4 +36,5 @@ order(2000, () => `${stock.fruits[fruit_index]} was selected`)
 .then( ()=>  order(1000, () => console.log(`${stock.toppings[topping_index]} was added`)))
 .catch(() => console.log('customer left'))
 .finally(() => console.log('day ended, shop is closed'))
+
 
