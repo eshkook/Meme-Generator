@@ -1,9 +1,3 @@
-let stock = {
-    fruits: ['lemon', 'strawberry'],
-    toppings: ['chocolate', 'vanila']
-}
-let is_shop_open = true
-
 let topping_choice = () => {
     return new Promise( (resolve, reject) => {
         setTimeout(() => {
@@ -12,11 +6,12 @@ let topping_choice = () => {
                                              })
 }
 
-async function kitchen() {
+async function kitchen() { // when calling this function, it will run in parallel to the code that comes after it  
     console.log(1)
     console.log(2)
     console.log(3)
-    await topping_choice()
+    await topping_choice() // the await makes this line wait until done before moving to the next, which isn't trivial, as
+                           // this line contains the ansychronous function setTimeout inside it
     console.log(4)
     console.log(5)
 
@@ -42,15 +37,3 @@ console.log('clean tables')
 
 
 
-
-// async function order() {
-//     try {
-//         await console.log(11)
-//     }
-//     catch(error) {
-//         console.log('abc not real', error)
-//     }
-//     finally {console.log('run anyway')}
-// }
-
-// order()
