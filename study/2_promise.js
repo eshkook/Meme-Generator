@@ -5,7 +5,9 @@ let order = (time, work) =>    {
                 resolve(work())
                              }, time)
         } else {
-            reject('shop is closed or either fruit or topping doesn\'t exist')
+            reject(console.log('shop is closed or either fruit or topping doesn\'t exist')) // you can return the strin and print 
+                                                                                            // it in 'catch' below instead of printing it here
+                                                                                            // to do it just ommit the 'consloe.log()' (and don't write 'return')
                           }
                                               }
                       )
@@ -17,7 +19,7 @@ toppings: ['chocolate', 'vanila']
 }
 let is_shop_open = true
 let fruit_index = 0
-let topping_index = 4
+let topping_index = 1
 
 // assuming preparing ice cream is the following process one by one(no asynchronous actions):
 // 1. taking the fruit out of fridge takes 2 seconds
@@ -32,8 +34,6 @@ order(2000, () => `${stock.fruits[fruit_index]} was selected`)
 })
 .then( ()=>  order(3000, () => console.log(`${stock.fruits[fruit_index]} was cut`)))
 .then( ()=>  order(1000, () => console.log(`${stock.toppings[topping_index]} was added`)))
-.catch(d => {
-    console.log(d)
-    console.log('customer left')
-})
+.catch(() => console.log('customer left'))
+.finally(() => console.log('day ended, shop is closed'))
 
