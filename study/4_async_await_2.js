@@ -16,7 +16,7 @@ function time(ms) {
 
 async function kitchen() {
     try {
-        await time(2000)
+        await time(2000) // why check each time if shop is open? because in other code maybe in the meantime somthing changed
         console.log(`${stock.fruits[fruit_index]} was cut`)
         await time(0)
         console.log('production has started')
@@ -39,6 +39,6 @@ let stock = {
 }
 let is_shop_open = true
 let fruit_index = 0
-let topping_index = 1
+let topping_index = 5
 
 kitchen()
