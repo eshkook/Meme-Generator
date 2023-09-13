@@ -1,4 +1,5 @@
 setTimeout(() => {       // this is asynchronous function, as the later code will run and not wait for this to end
+                         // thus later code better not be dependent on this chunk of code
     console.log(77777777777)
     setTimeout(() => {
         console.log(8888888888)
@@ -10,7 +11,7 @@ console.log(222)
 
 function one(call) {
     call() // this is a 'callback'
-    // two() // this works, then wat's the point giving it in the input of function 'one'? 
+    // two() // this works, then what's the point giving it in the input of function 'one'? 
           // an atvantage of a callback is if the input function changes its name, 
           // it saves the need to change it at each appearence inside function 'one'
     console.log('fun 1')
