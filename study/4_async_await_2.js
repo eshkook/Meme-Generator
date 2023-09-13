@@ -39,6 +39,9 @@ let stock = {
 }
 let is_shop_open = true
 let fruit_index = 0
-let topping_index = 5
+let topping_index = 1
 
 kitchen()
+
+console.log('clean dishes')
+console.log('clean tables')

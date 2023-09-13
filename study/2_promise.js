@@ -37,4 +37,5 @@ order(2000, () => `${stock.fruits[fruit_index]} was selected`)
 .catch(() => console.log('customer left'))
 .finally(() => console.log('day ended, shop is closed'))
 
-
+console.log('clean dishes')
+console.log('clean tables')
