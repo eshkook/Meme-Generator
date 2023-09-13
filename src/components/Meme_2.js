@@ -4,6 +4,8 @@ import imageIcon from "../images/image-icon.png"
 
 export default function Meme_2() {
 
+
+  console.log(999)
   // const [State, setState] = useState(1)
   // function updateState() {
   //   setState(prevState => prevState+1)
