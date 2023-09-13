@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react"
 import imageIcon from "../images/image-icon.png"
 
-
 export default function Meme_2() {
   // const [State, setState] = useState(1)
   // function updateState() {
   //   setState(prevState => prevState+1)
   // }
 
-  const [memeState, setMemeState] = useState({
+  const [memeState, setMemeState] = useState({ // why not initiating it inside the useEffect directly with the fetch value?
+                                               // (and then not have setMemeState in the useEffect)
+                                               // answer: it is not a good practice, ask gpt for more details
     topText: '',
     bottomText: '',
     img: ""
@@ -25,8 +26,6 @@ export default function Meme_2() {
         [name]: value
       }))
     } else {
-      
-      
       setMemeState(prevMemeState => ({
         ...prevMemeState,
         img: imagesState[Math.floor(Math.random()*imagesState.length)]
@@ -36,7 +35,7 @@ export default function Meme_2() {
 
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes").then(res => res.json()).then(data => {  // to use async instead the 'then's watch youtube 9:46:00
-        const mappedMemes = data.data.memes.map(meme => meme.url) // this command will not be skipped until finished, unlike setting states
+        const mappedMemes = data.data.memes.map(meme => meme.url) // this command will not be skipped until finished, unlike setting states which is asynchronous
         setImagesState(mappedMemes)
         setMemeState(prevMemeState => ({
           ...prevMemeState,

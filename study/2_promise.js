@@ -28,7 +28,7 @@ let topping_index = 1
 // 4. add topping takes 1 second
 
 order(2000, () => `${stock.fruits[fruit_index]} was selected`)       
-.then(console.log)
+.then(console.log) // equivalent to '.then(data => console.log(data))
 .then( ()=> {
     return order(0, () => console.log('production has started'))  
 })
