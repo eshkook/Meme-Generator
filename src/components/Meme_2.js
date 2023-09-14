@@ -33,15 +33,36 @@ export default function Meme_2() {
   }
   }
 
-  useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes").then(res => res.json()).then(data => {  // to use async instead the 'then's watch youtube 9:46:00
-        const mappedMemes = data.data.memes.map(meme => meme.url) // this command will not be skipped until finished, unlike setting states which is asynchronous
-        setImagesState(mappedMemes)
+  function getMemes() {
+    fetch("https://api.imgflip.com/get_memes")
+      .then(res => res.json())  
+      .then(data => {  // to use async instead the 'then's look at the comment below
+        const mappedMemes = data.data.memes.map(meme => meme.url) // this command will not be skipped until finished, 
+                                                                  // unlike setting states which is asynchronous
+        setImagesState(mappedMemes) // this line and the next one could be in separated 'then's sequentally instead of
+                            // this trick but this trick gives faster performance as this 2 lines are not really dependent of each other
+                            // and it is better to execute them in paralel, which is possible as satting a state is asynchronous
         setMemeState(prevMemeState => ({
           ...prevMemeState,
           img: mappedMemes[Math.floor(Math.random()*mappedMemes.length)]
         }))
       })
+  }
+
+  // // with async:
+  // async function getMemes() {
+  //   const res = await fetch("https://api.imgflip.com/get_memes")
+  //   const data = await res.json()
+  //   const mappedMemes = data.data.memes.map(meme => meme.url)
+  //   setImagesState(mappedMemes)
+  //   setMemeState(prevMemeState => ({
+  //     ...prevMemeState,
+  //     img: mappedMemes[Math.floor(Math.random()*mappedMemes.length)]
+  //   }))
+  // }
+
+  useEffect(() => {
+    getMemes()
   }, [])
 
   return (
