@@ -21,10 +21,7 @@ export default function Meme_3() {
         [name]: value
       }))
     } else {
-      setMemeState(prevMemeState => ({
-        ...prevMemeState,
-        img: imagesState[Math.floor(Math.random()*imagesState.length)]
-    }))
+        getImage()
   }
   }
 
