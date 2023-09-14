@@ -35,7 +35,7 @@ export default function Meme_2() {
 
   function getMemes() {
     fetch("https://api.imgflip.com/get_memes")
-      .then(res => res.json())  
+      .then(res => res.json()) // note that '.json()' is an ansynchronous function 
       .then(data => {  // to use async instead the 'then's look at the comment below
         const mappedMemes = data.data.memes.map(meme => meme.url) // this command will not be skipped until finished, 
                                                                   // unlike setting states which is asynchronous
