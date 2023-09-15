@@ -27,16 +27,17 @@ export default function Meme_3() {
 
   function getImage() {
     axios
-    .get('https://???????????????????????', { timeout: 5000 }) 
-    .then(res => res.json()) 
+    .get('http://127.0.0.1:8000/api/image/', { timeout: 5000 }) 
+    // .then(res => res.json()) 
     .then(data => {  
     // const mappedMemes = data.data.memes.map(meme => meme.url) 
     // setImagesState(mappedMemes) 
     setMemeState(prevMemeState => ({
         ...prevMemeState,
-        img: data
+        img: data.data
     }))
     })
+    .then(()=>console.log(memeState[img]))
     .catch(err => console.error(err))
   }
 
