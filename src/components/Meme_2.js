@@ -28,7 +28,7 @@ export default function Meme_2() {
     } else {
       setMemeState(prevMemeState => ({
         ...prevMemeState,
-        img: imagesState[Math.floor(Math.random()*imagesState.length)]
+        img: imagesState[Math.floor(Math.random()*imagesState.length)].url
     }))
   }
   }
@@ -37,14 +37,14 @@ export default function Meme_2() {
     fetch("https://api.imgflip.com/get_memes")
       .then(res => res.json()) // note that '.json()' is an ansynchronous function 
       .then(data => {  // to use async instead the 'then's look at the comment below
-        const mappedMemes = data.data.memes.map(meme => meme.url) // this command will not be skipped until finished, 
+        const mappedMemes = data.data.memes.map(meme => ({id: meme.id, url: meme.url})) // this command will not be skipped until finished, 
                                                                   // unlike setting states which is asynchronous
         setImagesState(mappedMemes) // this line and the next one could be in separated 'then's sequentally instead of
                             // this trick but this trick gives faster performance as this 2 lines are not really dependent of each other
                             // and it is better to execute them in paralel, which is possible as satting a state is asynchronous
         setMemeState(prevMemeState => ({
           ...prevMemeState,
-          img: mappedMemes[Math.floor(Math.random()*mappedMemes.length)]
+          img: mappedMemes[Math.floor(Math.random()*mappedMemes.length)].url
         }))
       })
   }

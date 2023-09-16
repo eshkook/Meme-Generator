@@ -14,8 +14,8 @@ export default function App() {
     <div className="container">
       <Header />
       {/* <Meme /> */}
-      {/* <Meme_2 /> */}
-      <Meme_3 />
+      <Meme_2 />
+      {/* <Meme_3 /> */}
       {/* <Form /> */}
     </div>
   )

@@ -27,7 +27,23 @@ const axios = require('axios')
 // .then(res => res.json())
 // .then(data => console.log(data)) 
 
-axios
-    .get('http://127.0.0.1:8000/api/image/', { timeout: 5000 }) 
-    // .then(res => res.json()) 
-    .then(data => console.log(data.data))
+// axios
+//     .get('http://127.0.0.1:8000/api/image/', { timeout: 5000 }) 
+//     // .then(res => res.json()) 
+//     .then(data => console.log(data.data))
+
+fetch("https://api.imgflip.com/get_memes")
+      .then(res => res.json()) // note that '.json()' is an ansynchronous function 
+      .then(data => {  // to use async instead the 'then's look at the comment below
+        const mappedMemes = data.data.memes.map(meme => ({id: meme.id, url: meme.url})) // this command will not be skipped until finished, 
+                                                                  // unlike setting states which is asynchronous
+        const fs = require('fs'); // Only if using Node.js
+
+        let jsonString = JSON.stringify(mappedMemes, null, 4); // the arguments null and 4 are for pretty printing
+                
+        // Save to a file (for Node.js)
+        fs.writeFileSync('data.json', jsonString, 'utf8');
+      })
+
+      
+      
