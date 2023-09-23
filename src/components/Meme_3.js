@@ -37,7 +37,6 @@ export default function Meme_3() {
         img: data.data
     }))
     })  
-    .then(()=>console.log(memeState[img]))
     .catch(err => console.error(err))
   }
 
