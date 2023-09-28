@@ -27,7 +27,7 @@ export default function Meme_3() {
 
   function getImage() {
     axios
-    .get('http://127.0.0.1:8000/api/image/', { timeout: 5000 }) 
+    .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/image/', { timeout: 5000 }) 
     // .then(res => res.json()) 
     .then(data => {  
     // const mappedMemes = data.data.memes.map(meme => meme.url) 
