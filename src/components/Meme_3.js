@@ -10,8 +10,6 @@ export default function Meme_3() {
     img: ''
   })
 
-//   const [imagesState, setImagesState] = useState([])
-
   function updateMeme(event) {
     const { name, value } = event.target
 
@@ -24,21 +22,6 @@ export default function Meme_3() {
         getImage()
   }
   }
-
-  // function getImage() {
-  //   axios
-  //   .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/image/', { timeout: 5000 }) 
-  //   // .then(res => res.json()) 
-  //   .then(data => {  
-  //   // const mappedMemes = data.data.memes.map(meme => meme.url) 
-  //   // setImagesState(mappedMemes) 
-  //   setMemeState(prevMemeState => ({
-  //       ...prevMemeState,
-  //       img: data.data
-  //   }))
-  //   })  
-  //   .catch(err => console.error(err))
-  // }
 
   function getImage() {
     axios

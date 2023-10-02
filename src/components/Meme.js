@@ -33,7 +33,7 @@ export default function Meme() {
 
     // if you have an array and you want to update some of its properties (like adding 1 to the k-th element):
     // const [ourDict, setOurDict] = useState([1,2,3,4,5])
-    // setArray(prevArray => ([...prevArray[:k], prevArray[k]+1, ...prevArray[k:]])) // the '()' in the last phrase are important
+    // setArray(prevArray => ([...prevArray[:k], prevArray[k]+1, ...prevArray[k+1:]])) // the '()' in the last phrase are important
     
     // another way:
     // setArray(prevArray => {
