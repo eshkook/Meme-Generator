@@ -3,6 +3,7 @@ import Meme from "./components/Meme.js"
 import Form from "./components/Form.js"
 import Meme_2 from "./components/Meme_2.js"
 import Meme_3 from "./components/Meme_3.js"
+import Meme_4 from "./components/Meme_4.js"
 
 export default function App() {
 
@@ -15,7 +16,8 @@ export default function App() {
       <Header />
       {/* <Meme /> */}
       {/* <Meme_2 /> */}
-      <Meme_3 />
+      {/* <Meme_3 /> */}
+      <Meme_4 />
       {/* <Form /> */}
     </div>
   )
