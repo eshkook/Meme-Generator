@@ -11,10 +11,10 @@ export default function Extra_id() {
     // console.log("rendered") // a way to make sure you don't have a bug that causes infiniite renders,
                             // which can happen for example when a component has an api call that is fed to a state,
                             // then that component will rerender infinately. managing these side effects is important                      
+    const { id } = useParams()
     
     return (
       <div className="container">
-        const { id } = useParams()
         <p>{id}</p>
         <Header />
         {/* <Meme /> */}

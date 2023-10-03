@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Header from "./Header.js"
 import Meme from "./Meme.js"
 import Form from "./Form.js"
@@ -13,6 +14,20 @@ export default function Extra() {
     
     return (
       <div className="container">
+        <h1>extras list:</h1>
+        <nav>
+        <ul>
+          <li>
+            <Link to="/extra/1">Extra 1</Link> 
+          </li>
+          <li>
+            <Link to="/extra/2">Extra 2</Link>
+          </li>
+          <li>
+            <Link to="/extra/3">Extra 3</Link> 
+          </li>
+        </ul>
+      </nav>
         <Header />
         {/* <Meme /> */}
         {/* <Meme_2 /> */}

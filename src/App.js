@@ -2,6 +2,7 @@ import { Link, Route, Routes } from "react-router-dom"
 import Home from "./components/Home.js"
 import Extra from "./components/Extra.js"
 import Extra_id from "./components/Extra_id.js"
+import NotFound from "./components/NotFound.js"
 
 export default function App() {
 
@@ -23,11 +24,15 @@ export default function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />}/>
-        <Route path="/extra" element={<Extra />}/>
-        <Route path="/extra/:id" element={<Extra_id />}/>
+        {/* <Route path="/extra" element={<Extra />}/>
+        <Route path="/extra/:id" element={<Extra_id />}/> */}
+        <Route path="/extra">
+          <Route index element={<Extra />}/>
+          <Route path=":id" element={<Extra_id />}/>
+        </Route>  
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
-    
   )
 }
 
