@@ -1,9 +1,7 @@
-import Header from "./components/Header.js"
-import Meme from "./components/Meme.js"
-import Form from "./components/Form.js"
-import Meme_2 from "./components/Meme_2.js"
-import Meme_3 from "./components/Meme_3.js"
-import Meme_4 from "./components/Meme_4.js"
+import { Link, Route, Routes } from "react-router-dom"
+import Home from "./components/Home.js"
+import Extra from "./components/Extra.js"
+import Extra_id from "./components/Extra_id.js"
 
 export default function App() {
 
@@ -12,14 +10,24 @@ export default function App() {
                           // then that component will rerender infinately. managing these side effects is important                      
   
   return (
-    <div className="container">
-      <Header />
-      {/* <Meme /> */}
-      {/* <Meme_2 /> */}
-      {/* <Meme_3 /> */}
-      <Meme_4 />
-      {/* <Form /> */}
-    </div>
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link> {/* Link is better than the regular 'a href' tag as it does in internally without refreshing the entire page */}
+          </li>
+          <li>
+            <Link to="/extra">Extra</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/extra" element={<Extra />}/>
+        <Route path="/extra/:id" element={<Extra_id />}/>
+      </Routes>
+    </>
+    
   )
 }
 
