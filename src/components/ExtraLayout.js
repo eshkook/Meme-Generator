@@ -1,6 +1,10 @@
-import { Link, Outlet } from "react-router-dom"
+import { useState } from "react"
+import { Link, Outlet, useSearchParams } from "react-router-dom"
 
-export default function ExtraLayout() {              
+export default function ExtraLayout() {     
+    // const [number, setNumber] = useState(4) 
+    const [searchParams, setSearchParams] = useSearchParams({ n: 4 })  // will add this data to the url, but only once it is changed for the first time. why doesn't is add the default?  
+    const number = searchParams.get("n")    
     
     return (
       <>
@@ -16,9 +20,19 @@ export default function ExtraLayout() {
             <li>
                 <Link to="/extra/3">Extra 3</Link> 
             </li>
+            <li>
+                <Link to={`/extra/${number}`}>Extra {number}</Link> 
+            </li>
           </ul>
         </nav>
         <Outlet context={{a: 1, b:2}} />  {/* This line is important for rendering nested routes */}
+        <input 
+          type="number" 
+          value={number} 
+          // onChange={e => setNumber(e.target.value)} 
+          onChange={e => setSearchParams({n: e.target.value})} 
+        />
+
       </>      
     )
   }
