@@ -2,7 +2,13 @@ import { Link, Route, Routes } from "react-router-dom"
 import Home from "./components/Home.js"
 import Extra from "./components/Extra.js"
 import Extra_id from "./components/Extra_id.js"
+import ExtraLayout from "./components/ExtraLayout.js"
 import NotFound from "./components/NotFound.js"
+import LayoutWrapper from "./components/LayoutWrapper.js"
+import Ultra from "./components/Ultra.js"
+import OverAllLayout from "./components/OverAllLayout.js"
+import MoreContent from "./components/MoreContent.js"
+import ZebraRoutes from "./components/ZebraRoutes.js"
 
 export default function App() {
 
@@ -12,6 +18,14 @@ export default function App() {
   
   return (
     <>
+      <Routes>
+        <Route path="/ultra" element={<MoreContent />} />
+      </Routes>
+
+      {/* the location makes every page to be is if it if ultra: ????????????????????????????? weird */}
+      {/* <Routes location="/ultra">
+        <Route path="/ultra" element={<MoreContent />} />
+      </Routes> */}
       <nav>
         <ul>
           <li>
@@ -20,17 +34,29 @@ export default function App() {
           <li>
             <Link to="/extra">Extra</Link>
           </li>
+          <li>
+            <Link to="/ultra">Ultra</Link>
+          </li>
+          <li>
+            <Link to="/zebra">Zebra</Link>
+          </li>
         </ul>
       </nav>
+      {/* without 'path' makes it relevant to all the paths children */}
       <Routes>
-        <Route path="/" element={<Home />}/>
-        {/* <Route path="/extra" element={<Extra />}/>
-        <Route path="/extra/:id" element={<Extra_id />}/> */}
-        <Route path="/extra">
-          <Route index element={<Extra />}/>
-          <Route path=":id" element={<Extra_id />}/>
-        </Route>  
-        <Route path="*" element={<NotFound />} />
+        <Route element={<OverAllLayout />}>
+          <Route path="/" element={<Home />}/>
+          <Route path="/extra" element={<ExtraLayout />}>
+            <Route index element={<Extra />}/>
+            <Route path=":id" element={<Extra_id />}/>
+          </Route>
+          <Route path="/ultra" element={<LayoutWrapper />}>
+            <Route index element={<Ultra />}/>
+          </Route>
+          {/* routes themselves are imported: */}
+          <Route path="/zebra" element={<ZebraRoutes />} />    
+          <Route path="*" element={<NotFound />} />
+        </Route> 
       </Routes>
     </>
   )
