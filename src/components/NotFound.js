@@ -13,7 +13,7 @@ export default function NotFound() {
 
         // Cleanup the timeout if the component is unmounted
         return () => {
-            clearTimeout(timer);
+            clearTimeout(timer)
         }
     }, [])
 
