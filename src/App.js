@@ -18,7 +18,7 @@ export default function App() {
                           // then that component will rerender infinately. managing these side effects is important  
                           
   const location = useLocation()            
-  console.log(location)            
+  // console.log(location)            
   
   return (
     <>
@@ -37,7 +37,7 @@ export default function App() {
             <Link to="/" replace>Home</Link> {/* replace makes it such that clicking back in this page will take you 2 pages back. good for example to keep logged in users logged in */} 
           </li>
           <li>
-            {/* the 'end' next line makes the css properties stick to this 'extra' url only when being exactly on it, and not also its children */}
+            {/* the 'end' next line makes the css properties stick to this 'extra' url only when being exactly on it, and not also when you land on its children */}
             <NavLink end
             style={({ isActive }) => {
               return isActive ? { color: 'red'} : {}
@@ -57,10 +57,9 @@ export default function App() {
           </li>
         </ul>
       </nav>
-      {location.state}
-      {/* without 'path' makes it relevant to all the paths children */}
+      {location.state} {/* it shows on screen even withot tags like<p></p> */}
       <Routes>
-        <Route element={<OverAllLayout />}>
+        <Route element={<OverAllLayout />}> {/* without 'path' makes it relevant to all the paths children */}
           <Route path="/" element={<Home />}/>
           <Route path="/extra" element={<ExtraLayout />}>
             <Route index element={<Extra />}/>

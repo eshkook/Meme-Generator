@@ -3,7 +3,7 @@ import { Link, Outlet, useSearchParams } from "react-router-dom"
 
 export default function ExtraLayout() {     
     // const [number, setNumber] = useState(4) 
-    const [searchParams, setSearchParams] = useSearchParams({ n: 4 })  // will add this data to the url, but only once it is changed for the first time. why doesn't is add the default?  
+    const [searchParams, setSearchParams] = useSearchParams({ n: 4 })  // similar to a state, but will also add this data to the url, but only once it is changed for the first time. why doesn't is add the default?  
     const number = searchParams.get("n")    
     
     return (
