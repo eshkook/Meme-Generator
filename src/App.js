@@ -68,9 +68,8 @@ export default function App() {
           <Route path="/ultra" element={<LayoutWrapper />}>
             <Route index element={<Ultra />}/>
           </Route>
-          {/* routes themselves are imported: */}
-          <Route path="/zebra/*" element={<ZebraRoutes />} />    
-          <Route path="*" element={<NotFound />} />
+          <Route path="/zebra/*" element={<ZebraRoutes />} /> {/* routes themselves are imported */}   
+          <Route path="*" element={<NotFound />} /> {/* any sub-route that is not one of the above will fall here */}
         </Route> 
       </Routes>
     </>
