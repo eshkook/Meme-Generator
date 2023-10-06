@@ -2,8 +2,6 @@ import { useState, useEffect } from "react"
 
 export default function Form() {
 
-  console.log(888)
-
   const [formState, setFormState] = useState({
     topText: '',
     bottomText: '',
