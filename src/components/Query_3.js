@@ -8,7 +8,7 @@ export default function Query_3() {
   
     return (
         <div>
-            <button onClick={() => setCurrentPage(<PostsLists />)}>
+            <button onClick={() => setCurrentPage(<PostsList1 />)}>
                 Posts List 1
             </button>
             <button onClick={() => setCurrentPage(<PostsList2 />)}>
