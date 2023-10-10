@@ -4,6 +4,7 @@ import Form from "./Form.js"
 import Meme_2 from "./Meme_2.js"
 import Meme_3 from "./Meme_3.js"
 import Meme_4 from "./Meme_4.js"
+import Query_1 from "./Query_1.js"
 
 export default function Home() {
 
@@ -16,9 +17,10 @@ export default function Home() {
         <Header />
         {/* <Meme /> */}
         {/* <Meme_2 /> */}
-        <Meme_3 />
+        {/* <Meme_3 /> */}
         {/* <Meme_4 /> */}
         {/* <Form /> */}
+        <Query_1 />
       </div>      
     )
   }
