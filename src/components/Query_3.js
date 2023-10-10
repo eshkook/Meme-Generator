@@ -5,7 +5,6 @@ import PostsList2 from "./PostsList2.js"
 export default function Query_3() {
     const [currentPage, setCurrentPage] = useState(<PostsList1 />)
 
-  
     return (
         <div>
             <button onClick={() => setCurrentPage(<PostsList1 />)}>
