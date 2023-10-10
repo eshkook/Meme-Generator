@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 // good for shared servers where you can't change url
 // import { StaticRouter } from 'react-router-dom/server' // for SSR
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools' 
 
 const queryClient = new QueryClient()
 
@@ -17,6 +18,7 @@ root.render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
       <App />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   </BrowserRouter>
 )
