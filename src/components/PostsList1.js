@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getPosts } from "./api/posts"
+import { getPosts } from "../api/posts.js"
 
 export default function PostsList1() {
   const postsQuery = useQuery({
