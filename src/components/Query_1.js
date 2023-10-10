@@ -35,7 +35,9 @@ export default function Query_1() {
         {postsQuery.data.map(post => (
           <div key={post.id}>{post.title}</div>
         ))}
-        <button onClick={() => newPostMutation.mutate("New Post")}>
+        <button 
+        disabled={newPostMutation.isLoading}  // will disable the button when loading the new post we just added
+        onClick={() => newPostMutation.mutate("New Post")}>
           Add New Post
         </button>
       </div>

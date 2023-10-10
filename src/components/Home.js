@@ -5,6 +5,8 @@ import Meme_2 from "./Meme_2.js"
 import Meme_3 from "./Meme_3.js"
 import Meme_4 from "./Meme_4.js"
 import Query_1 from "./Query_1.js"
+import Query_2 from "./Query_2.js"
+import Query_3 from "./Query_3.js"
 
 export default function Home() {
 
@@ -20,7 +22,9 @@ export default function Home() {
         {/* <Meme_3 /> */}
         {/* <Meme_4 /> */}
         {/* <Form /> */}
-        <Query_1 />
+        {/* <Query_1 /> */}
+        {/* <Query_2 /> */}
+        <Query_3 />
       </div>      
     )
   }
