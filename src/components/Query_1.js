@@ -1,4 +1,4 @@
-import { useQuery, useEffect } from "@tanstack/react-query"
+import { useQuery, useMutation } from "@tanstack/react-query"
 
 const POSTS = [
   {id: 1, title: "post 1"},
@@ -6,9 +6,16 @@ const POSTS = [
 ]
 
 export default function Query_1() {
-  useQuery({
+  const postsQuery = useQuery({
     queryKey: ["posts"], // a unique identifier for youe query
+    // queryFn: () => Promise.reject("Error Message"),
+    queryFn: () => wait(1000).then(() => [...POSTS]),
   })
+
+  if (postsQuery.isLoading) return <h1>Loading...</h1>
+  if (postsQuery.isError) {
+    return <pre>{JSON.stringify(postsQuery.error)}</pre>
+  }
 
   return (
     <h1>
