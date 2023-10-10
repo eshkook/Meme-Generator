@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 
 const POSTS = [
   {id: 1, title: "post 1"},
@@ -6,18 +6,22 @@ const POSTS = [
 ]
 
 export default function Query_1() {
-  console.log(POSTS)
-  const postsQuery = useQuery({
+
+  const queryClient = useQueryClient()
+  const postsQuery = useQuery({ // it is like a "get" request
     queryKey: ["posts"], // a unique identifier for youe query
     // queryFn: () => Promise.reject("Error Message"),
     queryFn: () => wait(1000).then(() => [...POSTS]),
   })
 
-  const newPostMutation = useMutation({
+  const newPostMutation = useMutation({ // it is like a "post" request
     mutationFn: title => {
       return wait(1000).then(() =>
       POSTS.push({ id: crypto.randomUUID(), title })
       )
+    },
+    onSuccess: () => { // when we changed something in POSTS we want to re-fetch it with the useQuery 
+      queryClient.invalidateQueries(["posts"])
     }
   })
 
