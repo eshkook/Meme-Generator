@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
-import { getPostsPaginated } from "./api/posts"
+import { getPostsPaginated } from "../api/posts"
 
 export function PostListPaginated() {
   const [page, setPage] = useState(1)
