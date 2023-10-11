@@ -3,6 +3,8 @@ import PostsList1 from "./PostsList1.js"
 import PostsList2 from "./PostsList2.js"
 import Post from "./Post.js"
 import CreatePost from "./CreatePost.js"
+import PostListInfinite from "./PostListInfinite.js"
+import PostListPaginated from "./PostListPaginated.js"
 
 export default function Query_3() {
     const [currentPage, setCurrentPage] = useState(<PostsList1 />)
@@ -20,6 +22,12 @@ export default function Query_3() {
             </button>
             <button onClick={() => setCurrentPage(<CreatePost setCurrentPage={setCurrentPage} />)}>
                 Create Post
+            </button>
+            <button onClick={() => setCurrentPage(<PostListInfinite />)}>
+                Post List Infinite
+            </button>
+            <button onClick={() => setCurrentPage(<PostListPaginated />)}>
+                Post List Paginated
             </button>
             <br />
             {currentPage}
