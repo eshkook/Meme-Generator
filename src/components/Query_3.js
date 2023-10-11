@@ -18,7 +18,7 @@ export default function Query_3() {
             <button onClick={() => setCurrentPage(<Post />)}>
                 Post
             </button>
-            <button onClick={() => setCurrentPage(<CreatePost />)}>
+            <button onClick={() => setCurrentPage(<CreatePost setCurrentPage={setCurrentPage} />)}>
                 Create Post
             </button>
             <br />
