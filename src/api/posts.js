@@ -2,7 +2,7 @@ import axios from "axios"
 
 export function getPosts() {
   return axios
-    .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/', { params: { _sort: "title" } })
+    .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/', { params: { _sort: "title" } }) // sorting by title
     .then(res => res.data)
 }
 
