@@ -8,7 +8,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools' 
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  // will make newly fetched data 'fresh' for 5 seconds before becoming 'stale' 
+  // When data is fresh, React Query will not attempt to refetch it 
+  // when components re-render or when new components that need the same data are mounted. 
+  defaultOptions: { 
+    queries: {
+      staleTime: 5000  
+    }
+   }
+  })
 
 // Get the root DOM node
 const root = ReactDOM.createRoot(document.getElementById('root'))
