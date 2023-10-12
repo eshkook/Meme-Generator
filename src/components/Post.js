@@ -21,7 +21,7 @@ export default function Post() {
     );
   
     const handleSubmit = (e) => {
-      e.preventDefault();
+      e.preventDefault(); // prevents a page reload when submitting the form
       setSubmittedId(id);
     };
   
@@ -33,7 +33,7 @@ export default function Post() {
             Enter Post ID:
             <input
               type="number"
-              value={id}
+              value={id} // single source of truth
               onChange={(e) => setId(e.target.value)}
             />
           </label>
