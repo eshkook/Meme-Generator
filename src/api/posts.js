@@ -24,16 +24,27 @@ export function getPost(id) {
 
 
 
-export function createPost({ title, body }) {
+// export function createPost({ title, body }) {
+//   return axios
+//     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/", {
+//       title,
+//       body,
+//       userId: 1,
+//       id: Date.now(),
+//     })
+//     .then(res => res.data)
+// }
+
+export function createPost({ title, body, userId }) {
   return axios
     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/", {
       title,
       body,
-      userId: 1,
-      id: Date.now(),
+      userId,  // include userId in the request payload
     })
     .then(res => res.data)
 }
+
 
 export function getPostsPaginated(page) {
   return axios
