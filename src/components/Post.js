@@ -27,6 +27,7 @@ export default function Post() {
   
     return (
       <div>
+        <br />
         <form onSubmit={handleSubmit}>
           <label>
             Enter Post ID:
@@ -40,7 +41,7 @@ export default function Post() {
         </form>
         {submittedId ? (
           postQuery.isLoading ? (
-            <h1>Loading...</h1>
+            <h1>Loading Post...</h1>
           ) : postQuery.isError ? (
             <h1>{postQuery.error.message}</h1>  // Display the error message 
           ) : postQuery.data ? (
