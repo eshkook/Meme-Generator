@@ -11,6 +11,7 @@ export default function Query_3() {
 
     return (
         <div>
+            <br />
             <button onClick={() => setCurrentPage(<PostsList1 />)}>
                 Posts List 1
             </button>
@@ -19,8 +20,8 @@ export default function Query_3() {
             </button>
             <br />
             <br />
-            <button onClick={() => setCurrentPage(<Post />)}>
-                get Post
+            <button onClick={() => setCurrentPage(<Post id={1} />)}>
+                Get Post
             </button>
             <button onClick={() => setCurrentPage(<CreatePost setCurrentPage={setCurrentPage} />)}>
                 Create Post

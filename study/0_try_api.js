@@ -23,7 +23,7 @@ const axios = require('axios')
 
 // getRoom()
 
-fetch("http://127.0.0.1:8000/api/image/")
+fetch("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/1")
 .then(res => res.json())
 .then(data => console.log(data)) 
 
