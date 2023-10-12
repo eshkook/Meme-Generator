@@ -10,36 +10,18 @@ export function getPosts() {
 //   return axios.get(`https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/${id}`).then(res => res.data)
 // }
 
-export async function getPost(id) {
-  try {
-    const response = await axios.get(`https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/${id}`);
-
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      // Handle non-200 responses
-      console.error(`Error: Received status code ${response.status}`);
-      throw new Error(`Error: Received status code ${response.status}`);
-    }
-  } catch (error) {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.error(error.response.data);
-      console.error(error.response.status);
-      console.error(error.response.headers);
-      throw error;  // Propagate the error to the caller
-    } else if (error.request) {
-      // The request was made but no response was received
-      console.error(error.request);
-      throw error;  // Propagate the error to the caller
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.error('Error', error.message);
-      throw error;  // Propagate the error to the caller
-    }
-  }
+export function getPost(id) {
+  return axios.get(`https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/${id}`)
+    .then(res => res.data)
+    .catch(error => {
+      if (error.response && error.response.status === 404) {
+        throw new Error("No such post");
+      } else {
+        throw error;
+      }
+    });
 }
+
 
 
 export function createPost({ title, body }) {
