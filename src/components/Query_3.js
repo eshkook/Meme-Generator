@@ -17,12 +17,16 @@ export default function Query_3() {
             <button onClick={() => setCurrentPage(<PostsList2 />)}>
                 Posts List 2
             </button>
+            <br />
+            <br />
             <button onClick={() => setCurrentPage(<Post />)}>
-                Post
+                get Post
             </button>
             <button onClick={() => setCurrentPage(<CreatePost setCurrentPage={setCurrentPage} />)}>
                 Create Post
             </button>
+            <br />
+            <br />
             <button onClick={() => setCurrentPage(<PostListInfinite />)}>
                 Post List Infinite
             </button>
