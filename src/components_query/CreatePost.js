@@ -5,7 +5,7 @@ import Post from "./Post";
 
 export default function CreatePost({ setCurrentPage }) {
     const titleRef = useRef(); // useRef hook is a reference to input elements. 
-    // better than useState as it does not trigger re-render when changed
+                               // difference from useState as it does not trigger re-render when changed
     const bodyRef = useRef();
     const userIdRef = useRef();
     const queryClient = useQueryClient();

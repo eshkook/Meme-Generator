@@ -1,5 +1,11 @@
 import axios from "axios"
 
+export function getImage() {
+  return axios
+  .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/image/', { timeout: 5000 })
+  .then(res => res.data)
+}
+
 export function getPosts() {
   return axios
     .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/', { params: { _sort: "title" } }) // sorting by title

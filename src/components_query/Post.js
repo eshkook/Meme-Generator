@@ -4,7 +4,6 @@ import { getPost } from "../api/posts.js";
 import { getUser } from "../api/users.js";
 
 export default function Post({ id_prop }) {
-    console.log(id_prop)
     const [id, setId] = useState("");  
     const [submittedId, setSubmittedId] = useState(null);
 
