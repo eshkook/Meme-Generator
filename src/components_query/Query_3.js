@@ -1,10 +1,10 @@
 import { useState } from "react"
-import PostsList1 from "./PostsList1.js"
-import PostsList2 from "./PostsList2.js"
-import Post from "./Post.js"
 import CreatePost from "./CreatePost.js"
+import Post from "./Post.js"
 import PostListInfinite from "./PostListInfinite.js"
 import PostListPaginated from "./PostListPaginated.js"
+import PostsList1 from "./PostsList1.js"
+import PostsList2 from "./PostsList2.js"
 
 export default function Query_3() {
     const [currentPage, setCurrentPage] = useState(<PostsList1 />)
@@ -39,5 +39,4 @@ export default function Query_3() {
             {currentPage}
         </div>
     )
-  }
-  
+}

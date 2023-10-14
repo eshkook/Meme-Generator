@@ -14,14 +14,14 @@ export default function Query_1() {
     queryFn: () => wait(1000).then(() => [...POSTS]),
   })
 
-  const newPostMutation = useMutation({ // it is like a "post" request
+  const newPostMutation = useMutation({ // it is like a "post" request. to trigger it you need 'newPostMutation.mutate'
     mutationFn: title => {
       return wait(1000).then(() =>
       POSTS.push({ id: crypto.randomUUID(), title })
       )
     },
-    onSuccess: () => { // when we changed something in POSTS we want to re-fetch it with the useQuery 
-      queryClient.invalidateQueries(["posts"])
+    onSuccess: () => { // when we changed something in POSTS we want to re-fetch it with the 'postsQuery' useQuery 
+      queryClient.invalidateQueries(["posts"]) 
     }
   })
 

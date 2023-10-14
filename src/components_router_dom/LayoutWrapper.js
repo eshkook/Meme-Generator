@@ -1,6 +1,6 @@
-import TopLayout from './TopLayout'
-import BottomLayout from './BottomLayout'
 import { Outlet } from "react-router-dom"
+import BottomLayout from './BottomLayout'
+import TopLayout from './TopLayout'
 
 export default function LayoutWrapper() {
     return (
