@@ -1,14 +1,23 @@
 import { useState } from "react"
 import imageIcon from "../images/image-icon.png"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { getImage } from "../api/posts.js";
 
 export default function Meme_5() {
 
-  const postsQuery = useQuery({ // it is like a "get" request
-    queryKey: ["posts"], // a unique identifier for your query
-    queryFn: getImage
-  })
+  const queryClient = useQueryClient()
+
+  const imageQuery = useQuery({
+    queryKey: ["images"],
+    queryFn: getImage,
+    refetchOnWindowFocus: false,  // Add this if you don't want refetching on window focus
+    onSuccess: data => {
+      setMemeState(prevMemeState => ({
+        ...prevMemeState,
+        img: data
+      }));
+    }
+});
 
   const [memeState, setMemeState] = useState({ // why not initiating it inside the useEffect directly with the fetch value?
                                                // (and then not have setMemeState in the useEffect)
@@ -27,13 +36,10 @@ export default function Meme_5() {
         [name]: value
       }))
     } else {
-      setMemeState(prevMemeState => ({
-        ...prevMemeState,
-        img: response.data
-        }));
+      queryClient.invalidateQueries("image")
   }
   }
-  
+ 
   return (
     <main>
       <div className="form">
