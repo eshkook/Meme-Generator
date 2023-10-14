@@ -9,7 +9,7 @@ export default function Query_1() {
 
   const queryClient = useQueryClient()
   const postsQuery = useQuery({ // it is like a "get" request
-    queryKey: ["posts"], // a unique identifier for youe query
+    queryKey: ["posts"], // a unique identifier for your query
     // queryFn: () => Promise.reject("Error Message"),
     queryFn: () => wait(1000).then(() => [...POSTS]),
   })
@@ -35,6 +35,7 @@ export default function Query_1() {
         {postsQuery.data.map(post => (
           <div key={post.id}>{post.title}</div>
         ))}
+        <br />
         <button 
         disabled={newPostMutation.isLoading}  // will disable the button when loading the new post we just added
         onClick={() => newPostMutation.mutate("New Post")}>
