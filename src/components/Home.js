@@ -22,7 +22,7 @@ export default function Home() {
         <Header />
         <br />
         <br />
-        <button onClick={() => setCurrentPage(<Meme />)}>
+        <button onClick={() => setCurrentPage(<Meme />)}> {/* not the correct way, better with Link */}
             Meme 1
         </button>
         <button onClick={() => setCurrentPage(<Meme_2 />)}>
@@ -35,11 +35,9 @@ export default function Home() {
             Meme 4
         </button>
         <br />
-        <br />
         <button onClick={() => setCurrentPage(<Form />)}>
             Form 
         </button>
-        <br />
         <br />
         <button onClick={() => setCurrentPage(<Query_1 />)}>
             Query 1
@@ -50,7 +48,6 @@ export default function Home() {
         <button onClick={() => setCurrentPage(<Query_3 />)}>
             Query 3
         </button>
-        <br />
         {currentPage}
       </div>      
     )

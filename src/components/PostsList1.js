@@ -8,7 +8,7 @@ export default function PostsList1() {
     queryFn: getPosts,
     staleTime: 5000, // will make newly fetched data 'fresh' for 5 seconds before becoming 'stale'
                      // When data is fresh, React Query will not attempt to refetch it 
-                     // when components re-render or when new components that need the same data are mounted. 
+                     //         when components re-render or when new components that need the same data are mounted. 
     // refetchInterval: 10000 , // will re-fetch every 10 seconds, even if it is fresh at a given moment                  
     placeholderData: [{ id: 1, title: "Initial Data" }], // will be displayed initially until response comes in.
                                     // it overrides the later code :'if (postsQuery.status === "loading") return <h1>Loading...</h1>'

@@ -9,14 +9,13 @@ const POSTS = [
 // /posts -> ["posts"]
 // /posts/1 -> ["posts", post.id]
 // /posts?authorId=1 -> ["posts", {authorId: 1}]
-// /posts/2/comments -> ["posts", , post.id, "comments"]
+// /posts/2/comments -> ["posts", post.id, "comments"]
 
 export default function Query_2() {
 
   const queryClient = useQueryClient()
   const postsQuery = useQuery({ // it is like a "get" request
     queryKey: ["posts"], // a unique identifier for youe query
-    // queryFn: () => Promise.reject("Error Message"),
     queryFn: (obj) => // the important key of obj is queryKey
         wait(1000).then(() => {
             console.log(obj)

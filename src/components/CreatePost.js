@@ -26,16 +26,6 @@ export default function CreatePost({ setCurrentPage }) {
       body: bodyRef.current.value,
       userId: userIdInt,  // include userId in the mutation data
     });
-
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     const userIdInt = parseInt(userIdRef.current.value, 10); // Convert userId to integer
-    //     createPostMutation.mutate({
-    //       title: titleRef.current.value,
-    //       body: bodyRef.current.value,
-    //       userId: userIdInt,  // Include userId as an integer
-    //     });
-    // }
   }
 
   return (

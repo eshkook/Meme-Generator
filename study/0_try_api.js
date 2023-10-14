@@ -46,4 +46,3 @@ fetch("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/1")
 //       })
 
       
-      

@@ -7,7 +7,7 @@ const POSTS = [
 
 export default function Query_1() {
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient() // with this hook we determine later where we want to refetch data
   const postsQuery = useQuery({ // it is like a "get" request
     queryKey: ["posts"], // a unique identifier for your query
     // queryFn: () => Promise.reject("Error Message"),
