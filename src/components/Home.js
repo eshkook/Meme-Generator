@@ -17,7 +17,7 @@ export default function Home() {
   // which can happen for example when a component has an api call that is fed to a state,
   // then that component will rerender infinately. managing these side effects is important
 
-  const [currentPage, setCurrentPage] = useState(<Meme_3 />)
+  const [currentPage, setCurrentPage] = useState(<Meme_5 />)
 
   return (
     <div className="container">

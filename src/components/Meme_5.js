@@ -7,7 +7,8 @@ export default function Meme_5() {
 
   const queryClient = useQueryClient()
 
-  const imageQuery = useQuery({
+  const imageQuery = useQuery({ // it is triggered when first rendering and also when queryClient.invalidateQueries("image") is
+                                // triggered, which we later do when button is clicked
     queryKey: ["images"],
     queryFn: getImage,
     refetchOnWindowFocus: false,  // Add this if you don't want refetching on window focus
