@@ -29,11 +29,11 @@ export default function Query_3() {
             </button>
             <br />
             <br />
-            <button onClick={() => setCurrentPage(<PostListInfinite />)}>
-                Post List Infinite
-            </button>
             <button onClick={() => setCurrentPage(<PostListPaginated />)}>
                 Post List Paginated
+            </button>
+            <button onClick={() => setCurrentPage(<PostListInfinite />)}>
+                Post List Infinite
             </button>
             <br />
             {currentPage}
