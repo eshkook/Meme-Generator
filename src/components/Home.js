@@ -3,6 +3,7 @@ import Query_1 from "../components_query/Query_1.js"
 import Query_2 from "../components_query/Query_2.js"
 import Query_3 from "../components_query/Query_3.js"
 import Form from "./Form.js"
+import Authentication from "../components_authentication/Authentication.js"
 import Header from "./Header.js"
 import Meme from "./Meme.js"
 import Meme_2 from "./Meme_2.js"
@@ -42,6 +43,9 @@ export default function Home() {
       <br />
       <button onClick={() => setCurrentPage(<Form />)}>
         Form
+      </button>
+      <button onClick={() => setCurrentPage(<Form_Django />)}>
+        Form Django
       </button>
       <br />
       <button onClick={() => setCurrentPage(<Query_1 />)}>
