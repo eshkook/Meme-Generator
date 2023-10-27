@@ -61,6 +61,7 @@ export default function Home() {
       <button onClick={() => setCurrentPage(<Local_Storage />)}>
         Local Storage
       </button>
+      <br />
       {currentPage}
     </div>
   )

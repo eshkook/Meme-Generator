@@ -1,4 +1,4 @@
-import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom"
+import { Link, NavLink, Route, Routes, useLocation, BrowserRouter } from "react-router-dom"
 import Home from "./components/Home.js"
 import MoreContent from "./components_router_dom/MoreContent.js"
 import Extra from "./components_router_dom/Extra.js"
@@ -9,6 +9,9 @@ import NotFound from "./components_router_dom/NotFound.js"
 import OverAllLayout from "./components_router_dom/OverAllLayout.js"
 import Ultra from "./components_router_dom/Ultra.js"
 import ZebraRoutes from "./components_router_dom/ZebraRoutes.js"
+import Login from "./components_authentication/Login.js"
+import SignUp from "./components_authentication/SignUp.js"
+import You_are_logged from "./components_authentication/You_are_logged.js"
 import "./styles/index.css"; // relevant for the NavLinks in this code
 
 export default function App() {
@@ -21,6 +24,7 @@ export default function App() {
   // console.log(location)            
 
   return (
+    // <BrowserRouter>
     <>
       <Routes>
         <Route path="/ultra" element={<MoreContent />} />
@@ -69,10 +73,16 @@ export default function App() {
             <Route index element={<Ultra />} />
           </Route>
           <Route path="/zebra/*" element={<ZebraRoutes />} /> {/* routes themselves are imported */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/youarelogged" element={<You_are_logged />} />
           <Route path="*" element={<NotFound />} /> {/* any sub-route that is not one of the above will fall here */}
         </Route>
       </Routes>
+
+
     </>
+    // </BrowserRouter>
   )
 }
 
