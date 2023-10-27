@@ -7,12 +7,12 @@ export default function Authentication() {
     return (
         <>
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
-            <Link to= {'/login'} >
-                <Button>Login</Button>
-            </Link>
-            <Link to= {'/signup'} >
-                <Button>Sign Up</Button>
-            </Link>
+                <Link to= {'/login'} >
+                    <Button>Login</Button>
+                </Link>
+                <Link to= {'/signup'} >
+                    <Button>Sign Up</Button>
+                </Link>
             </ButtonGroup>
         </>
     );
