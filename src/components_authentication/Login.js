@@ -11,6 +11,11 @@ export default function Login() {
         Password: ''
       })
 
+    const [fieldErrorState, setFieldError] = useState({
+        Username: false,
+        Password: false
+      })  
+
       function updateFormState(event) { 
         const {name, value} = event.target
         setFormState(prevFormState => ({
@@ -21,8 +26,15 @@ export default function Login() {
     
       function handleSubmit(event) { 
         event.preventDefault() // preventing re-rendering the page 
-        console.log(formState)
-        // api send the data submitted
+        setFieldError({
+            Username: (formState.Username===''),
+            Password: (formState.Password==='')
+        })
+
+        if (fieldErrorState.Username || fieldErrorState.Password) {
+            console.log(formState)
+            // api send the data submitted
+        }    
       }
     
     return (
@@ -43,6 +55,7 @@ export default function Login() {
                     variant="outlined"
                     name="Username"
                     value={formState.Username}
+                    error = {fieldErrorState.Username}
                     // required  // make a '*' to indicate it is a mandatory field
                      />
                 <TextField
@@ -52,6 +65,7 @@ export default function Login() {
                     variant="outlined"
                     name="Password"
                     value={formState.Password}
+                    error = {fieldErrorState.Password}
                     // required  // make a '*' to indicate it is a mandatory field
                      />
                 <Button variant="contained" type='submit'>Submit</Button>
