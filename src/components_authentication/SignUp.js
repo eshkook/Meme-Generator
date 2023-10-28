@@ -9,9 +9,9 @@ export default function SignUp() {
 
   const createPostMutation = useMutation({
     mutationFn: signup_post,
-    onSuccess: data => {
-      pass //??????????????????????????????????????????????????
-    },
+    // onSuccess: data => {
+    //   pass 
+    // },
   });
 
   const [formState, setFormState] = useState({
@@ -26,6 +26,7 @@ export default function SignUp() {
     username: false,
     password: false,
     password_confirmation: false,
+    age: false
   })
 
   function updateFormState(event) {
@@ -42,6 +43,7 @@ export default function SignUp() {
       username: (formState.username == ''),
       password: (formState.password == ''),
       password_confirmation: (formState.password_confirmation != formState.password || formState.password_confirmation == ''),
+      age: (isNaN(formState.age) || formState.age < 0 || formState.age > 120)
     }
     setFieldError(temp_object)
 
@@ -68,53 +70,58 @@ export default function SignUp() {
         {/* noValidate makes the browser not use its built-in validation messages as we want to do it ourselves, 
           autoComplete off makes it not complete the user's text */}
 
-        <TextField
-          onChange={updateFormState} // same as writing onChange={()=>updateFormState(event)}
-          id="outlined-basic"
-          label="Username"
-          variant="outlined"
-          name="username"
-          value={formState.username}
-          error={fieldErrorState.username}
-        // required  // make a '*' to indicate it is a mandatory field
-        />
-        <TextField
-          onChange={updateFormState}
-          id="outlined-basic"
-          label="Password"
-          variant="outlined"
-          name="password"
-          value={formState.password}
-          error={fieldErrorState.password}
-        // required  // make a '*' to indicate it is a mandatory field
-        />
-        <TextField
-          onChange={updateFormState}
-          id="outlined-basic"
-          label="Password Confirmation"
-          variant="outlined"
-          name="password_confirmation"
-          value={formState.password_confirmation}
-          error={fieldErrorState.password_confirmation}
-        // required  // make a '*' to indicate it is a mandatory field
-        />
-        <TextField
-          onChange={updateFormState}
-          id="outlined-basic"
-          label="Hobbies"
-          variant="outlined"
-          name="hobbies"
-          value={formState.hobbies}
-        />
-        <TextField
-          onChange={updateFormState}
-          id="outlined-basic"
-          label="Age"
-          variant="outlined"
-          name="age"
-          value={formState.age}
-        />
-        <Button variant="contained" type='submit'>Submit</Button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <TextField
+            onChange={updateFormState} // same as writing onChange={()=>updateFormState(event)}
+            id="outlined-basic"
+            label="Username"
+            variant="outlined"
+            name="username"
+            value={formState.username}
+            error={fieldErrorState.username}
+            required  // make a '*' to indicate it is a mandatory field
+          />
+          <TextField
+            onChange={updateFormState}
+            id="outlined-basic"
+            label="Password"
+            variant="outlined"
+            name="password"
+            value={formState.password}
+            error={fieldErrorState.password}
+            required  // make a '*' to indicate it is a mandatory field
+          />
+          <TextField
+            onChange={updateFormState}
+            id="outlined-basic"
+            label="Password Confirmation"
+            variant="outlined"
+            name="password_confirmation"
+            value={formState.password_confirmation}
+            error={fieldErrorState.password_confirmation}
+            required  // make a '*' to indicate it is a mandatory field
+          />
+          <TextField
+            onChange={updateFormState}
+            id="outlined-basic"
+            label="Hobbies"
+            variant="outlined"
+            name="hobbies"
+            value={formState.hobbies}
+          />
+          <TextField
+            onChange={updateFormState}
+            id="outlined-basic"
+            label="Age"
+            type="number"
+            InputProps={{ inputProps: { min: 0, max: 120 } }}
+            variant="outlined"
+            name="age"
+            value={formState.age}
+            error={fieldErrorState.age}
+          />
+          <Button variant="contained" type='submit'>Submit</Button>
+        </div>
       </form>
     </>
   )
