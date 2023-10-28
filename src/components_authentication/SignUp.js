@@ -4,14 +4,19 @@ import Button from '@mui/material/Button';
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
 import { signup_post } from "../api/posts.js";
+import { useNavigate } from "react-router-dom"
 
 export default function SignUp() {
 
-  const createPostMutation = useMutation({
+  const navigate = useNavigate()
+
+  const signupMutation = useMutation({
     mutationFn: signup_post,
-    // onSuccess: data => {
-    //   pass 
-    // },
+    onSuccess: data => {
+      // if (?????????) {
+      //    navigate("/You_are_logged", { state: "????????" })
+      // }
+    },
   });
 
   const [formState, setFormState] = useState({
@@ -50,12 +55,12 @@ export default function SignUp() {
     if (!(temp_object.username || temp_object.password || temp_object.password_confirmation || temp_object.age)) {
       console.log(formState)
 
-      // createPostMutation.mutate({
-      //     username: formState.username,
-      //     password: formState.password,
-      //     hobbies: formState.hobbies,  
-      //     age: formState.age
-      // });
+      signupMutation.mutate({
+          username: formState.username,
+          password: formState.password,
+          hobbies: formState.hobbies,  
+          age: formState.age
+      });
     }
   }
 
@@ -120,7 +125,9 @@ export default function SignUp() {
             value={formState.age}
             error={fieldErrorState.age}
           />
-          <Button variant="contained" type='submit'>Submit</Button>
+          <Button variant="contained" type='submit'>
+            {signupMutation.isLoading ? "Loading..." : "Submit"}
+          </Button>
         </div>
       </form>
     </>
