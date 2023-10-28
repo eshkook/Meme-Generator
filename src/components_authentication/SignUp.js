@@ -47,13 +47,13 @@ export default function SignUp() {
       
       if (!(temp_object.username || temp_object.password || temp_object.password_confirmation)) {
           console.log(formState)
-          
-          createPostMutation.mutate({
-              username: titleRef.current.value,
-              password: bodyRef.current.value,
-              hobbies: userIdInt,  // include userId in the mutation data
-              age: 3 //
-          });
+
+          // createPostMutation.mutate({
+          //     username: formState.username,
+          //     password: formState.password,
+          //     hobbies: formState.hobbies,  
+          //     age: formState.age
+          // });
       }    
     }
   
