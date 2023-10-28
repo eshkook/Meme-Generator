@@ -43,7 +43,7 @@ export default function Login() {
                     variant="outlined"
                     name="Username"
                     value={formState.Username}
-                    // required
+                    // required  // make a '*' to indicate it is a mandatory field
                      />
                 <TextField
                     onChange={updateFormState}
@@ -52,7 +52,7 @@ export default function Login() {
                     variant="outlined"
                     name="Password"
                     value={formState.Password}
-                    // required
+                    // required  // make a '*' to indicate it is a mandatory field
                      />
                 <Button variant="contained" type='submit'>Submit</Button>
             </form>
