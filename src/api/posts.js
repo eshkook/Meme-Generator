@@ -1,10 +1,21 @@
 import axios from "axios"
 
-export function logIn({ Username, Password }) { ////////////////////??????????????????????????????????????????
+export function signup_post({ username, password, hobbies, age }) { 
   return axios
-    .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/????????????/", {
-      Username,
-      Password,
+    .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/login/", {
+      username,
+      password,
+      hobbies,
+      age
+    })
+    .then(res => res.data)
+}
+
+export function login_post({ username, password }) { 
+  return axios
+    .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/login/", {
+      username,
+      password,
     })
     .then(res => res.data)
 }

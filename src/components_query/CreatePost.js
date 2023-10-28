@@ -16,7 +16,7 @@ export default function CreatePost({ setCurrentPage }) {
             // if we stayed in this page and needed to access data, the following 2 commands could be relevant.
             //   queryClient.setQueryData(["posts", data.id], data); // It updates the cache with the new post data
             //   queryClient.invalidateQueries(["posts"], { exact: true }); // the '{ exact: true }' says that only 
-            //   the exact ["posts"] urland not its extensions
+            //   the exact ["posts"] url and not its extensions
             setCurrentPage(<Post id_prop={data.id} />); // the better way to do it is with Link
         },
     });
