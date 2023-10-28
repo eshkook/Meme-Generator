@@ -47,7 +47,7 @@ export default function SignUp() {
     }
     setFieldError(temp_object)
 
-    if (!(temp_object.username || temp_object.password || temp_object.password_confirmation)) {
+    if (!(temp_object.username || temp_object.password || temp_object.password_confirmation || temp_object.age)) {
       console.log(formState)
 
       // createPostMutation.mutate({

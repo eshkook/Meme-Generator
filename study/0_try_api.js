@@ -44,4 +44,3 @@ fetch("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/1")
 //         // Save to a file (for Node.js)
 //         fs.writeFileSync('data.json', jsonString, 'utf8');
 //       })
-
