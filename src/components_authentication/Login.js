@@ -2,12 +2,13 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
 import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useState } from "react"
 
 export default function Login() {
 
     const [formState, setFormState] = useState({
-        topText: '',
-        bottomText: ''
+        Username: '',
+        Password: ''
       })
 
       function updateFormState(event) { 
@@ -26,19 +27,22 @@ export default function Login() {
     
     return (
         <>
-            <Typography variant="subtitle1" component="h2">
-                Login
+            <Typography variant="subtitle1" component="h1">
+                Login:
             </Typography>
+            <br />
 
             <form onSubmit={handleSubmit} noValidate autoComplete='off'>
                 {/* noValidate makes the browser not use its built-in validation messages as we want to do it ourselves, 
             autoComplete off makes it not complete the user's text */}
 
                 <TextField
-                    onChange={updateFormState}
+                    onChange={updateFormState} // same as writing onChange={()=>updateFormState(event)}
                     id="outlined-basic"
                     label="Username"
                     variant="outlined"
+                    name="Username"
+                    value={formState.Username}
                     // required
                      />
                 <TextField
@@ -46,9 +50,11 @@ export default function Login() {
                     id="outlined-basic"
                     label="Password"
                     variant="outlined"
+                    name="Password"
+                    value={formState.Password}
                     // required
                      />
-                <Button variant="contained">Submit</Button>
+                <Button variant="contained" type='submit'>Submit</Button>
             </form>
         </>
     )
