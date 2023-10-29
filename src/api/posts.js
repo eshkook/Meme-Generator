@@ -20,7 +20,7 @@ export function login_post({ username, password }) {
     .then(res => res.data)
 }
 
-export function logout_post({  }) { 
+export function logout_post() { 
   return axios
     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/", {
       

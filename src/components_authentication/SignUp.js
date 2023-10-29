@@ -10,14 +10,32 @@ export default function SignUp() {
 
   const navigate = useNavigate()
 
+  // const signupMutation = useMutation({
+  //   mutationFn: signup_post,
+  //   onSuccess: data => {
+  //     // if (?????????) {
+  //     //    navigate("/You_are_logged", { state: "????????" })
+  //     // }
+  //   },
+  // });
+
   const signupMutation = useMutation({
     mutationFn: signup_post,
     onSuccess: data => {
-      // if (?????????) {
-      //    navigate("/You_are_logged", { state: "????????" })
-      // }
+      if (data.error) {
+        // Handle error (e.g., display error message to user)
+        console.error(data.error);
+      } else {
+        // Signup and login were successful, navigate to the logged in page
+        navigate("/You_are_logged", { state: { username: data.username } });
+      }
     },
+    onError: error => {
+      // Handle an error response (status code outside 2xx)
+      console.error(error.message);
+    }
   });
+
 
   const [formState, setFormState] = useState({
     username: '',

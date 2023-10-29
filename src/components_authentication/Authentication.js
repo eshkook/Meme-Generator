@@ -18,9 +18,9 @@ export default function Authentication() {
                 <Link to={'/signup'} >
                     <Button>Sign Up</Button>
                 </Link>
-                <Link to={'/youarelogged'} >
+                {/* <Link to={'/youarelogged'} >
                     <Button>Temp Logging</Button>
-                </Link>
+                </Link> */}
             </ButtonGroup>
         </>
     );
