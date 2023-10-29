@@ -9,6 +9,7 @@ import NotFound from "./components_router_dom/NotFound.js"
 import OverAllLayout from "./components_router_dom/OverAllLayout.js"
 import Ultra from "./components_router_dom/Ultra.js"
 import ZebraRoutes from "./components_router_dom/ZebraRoutes.js"
+import Authentication from "./components_authentication/Authentication.js"
 import Login from "./components_authentication/Login.js"
 import SignUp from "./components_authentication/SignUp.js"
 import You_are_logged from "./components_authentication/You_are_logged.js"
@@ -73,6 +74,7 @@ export default function App() {
             <Route index element={<Ultra />} />
           </Route>
           <Route path="/zebra/*" element={<ZebraRoutes />} /> {/* routes themselves are imported */}
+          <Route path="/authentication" element={<Authentication />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/youarelogged" element={<You_are_logged />} />

@@ -1,8 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 
 const POSTS = [
-  {id: 1, title: "post 1"},
-  {id: 2, title: "post 2"}
+  { id: 1, title: "post 1" },
+  { id: 2, title: "post 2" }
 ]
 
 export default function Query_1() {
@@ -17,11 +17,11 @@ export default function Query_1() {
   const newPostMutation = useMutation({ // it is like a "post" request. to trigger it you need 'newPostMutation.mutate'
     mutationFn: title => {
       return wait(1000).then(() =>
-      POSTS.push({ id: crypto.randomUUID(), title })
+        POSTS.push({ id: crypto.randomUUID(), title })
       )
     },
     onSuccess: () => { // when we changed something in POSTS we want to re-fetch it with the 'postsQuery' useQuery 
-      queryClient.invalidateQueries(["posts"]) 
+      queryClient.invalidateQueries(["posts"])
     }
   })
 
@@ -31,17 +31,17 @@ export default function Query_1() {
   }
 
   return (
-      <div style={{ marginTop: 20 }}>
-        {postsQuery.data.map(post => (
-          <div key={post.id}>{post.title}</div>
-        ))}
-        <br />
-        <button 
+    <div style={{ marginTop: 20 }}>
+      {postsQuery.data.map(post => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+      <br />
+      <button
         disabled={newPostMutation.isLoading}  // will disable the button when loading the new post we just added
         onClick={() => newPostMutation.mutate("New Post")}>
-          Add New Post
-        </button>
-      </div>
+        Add New Post
+      </button>
+    </div>
   )
 }
 

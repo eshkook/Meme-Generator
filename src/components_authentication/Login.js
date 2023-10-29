@@ -8,91 +8,94 @@ import { useNavigate } from "react-router-dom"
 
 export default function Login() {
 
-  const navigate = useNavigate()
+    const navigate = useNavigate()
 
-  const loginMutation = useMutation({
-    mutationFn: login_post,
-    onSuccess: data => {
-      // if (?????????) {
-      //    navigate("/You_are_logged", { state: "????????" })
-      // }
-    },
-  });
+    const loginMutation = useMutation({
+        mutationFn: login_post,
+        onSuccess: data => {
+            // if (?????????) {
+            //    navigate("/You_are_logged", { state: "????????" })
+            // }
+        },
+    });
 
-  const [formState, setFormState] = useState({
-    username: '',
-    password: '',
-  })
+    const [formState, setFormState] = useState({
+        username: '',
+        password: '',
+    })
 
-  const [fieldErrorState, setFieldError] = useState({
-    username: false,
-    password: false,
-  })
+    const [fieldErrorState, setFieldError] = useState({
+        username: false,
+        password: false,
+    })
 
-  function updateFormState(event) {
-    const { name, value } = event.target
-    setFormState(prevFormState => ({
-      ...prevFormState,
-      [name]: value
-    }))
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault() // preventing re-rendering the page
-    const temp_object = {
-      username: (formState.username == ''),
-      password: (formState.password == ''),
+    function updateFormState(event) {
+        const { name, value } = event.target
+        setFormState(prevFormState => ({
+            ...prevFormState,
+            [name]: value
+        }))
     }
-    setFieldError(temp_object)
 
-    if (!(temp_object.username || temp_object.password)) {
-      console.log(formState)
+    function handleSubmit(event) {
+        event.preventDefault() // preventing re-rendering the page
+        const temp_object = {
+            username: (formState.username == ''),
+            password: (formState.password == ''),
+        }
+        setFieldError(temp_object)
 
-      loginMutation.mutate({
-          username: formState.username,
-          password: formState.password,
-      });
+        if (!(temp_object.username || temp_object.password)) {
+            console.log(formState)
+
+            loginMutation.mutate({
+                username: formState.username,
+                password: formState.password,
+            });
+        }
     }
-  }
 
-  return (
-    <>
-      <Typography variant="subtitle1" component="h1">
-        Log in:
-      </Typography>
-      <br />
+    return (
+        <>
+            <Typography variant="subtitle1" component="h1">
+                Log in:
+            </Typography>
+            <br />
 
-      <form onSubmit={handleSubmit} noValidate autoComplete='off'>
-        {/* noValidate makes the browser not use its built-in validation messages as we want to do it ourselves, 
+            <form onSubmit={handleSubmit} noValidate autoComplete='off'>
+                {/* noValidate makes the browser not use its built-in validation messages as we want to do it ourselves, 
           autoComplete off makes it not complete the user's text */}
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <TextField
-            onChange={updateFormState} // same as writing onChange={()=>updateFormState(event)}
-            id="outlined-basic"
-            label="Username"
-            variant="outlined"
-            name="username"
-            value={formState.username}
-            error={fieldErrorState.username}
-            // required  // make a '*' to indicate it is a mandatory field
-          />
-          <TextField
-            onChange={updateFormState}
-            id="outlined-basic"
-            label="Password"
-            variant="outlined"
-            name="password"
-            value={formState.password}
-            error={fieldErrorState.password}
-            // required  // make a '*' to indicate it is a mandatory field
-          />
-          <Button variant="contained" type='submit'>
-            {loginMutation.isLoading ? "Loading..." : "Submit"}
-          </Button>
-        </div>
-      </form>
-    </>
-  )
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <TextField
+                        onChange={updateFormState} // same as writing onChange={()=>updateFormState(event)}
+                        id="outlined-basic"
+                        label="Username"
+                        variant="outlined"
+                        name="username"
+                        value={formState.username}
+                        error={fieldErrorState.username}
+                    // required  // make a '*' to indicate it is a mandatory field
+                    />
+                    <TextField
+                        onChange={updateFormState}
+                        id="outlined-basic"
+                        label="Password"
+                        variant="outlined"
+                        name="password"
+                        value={formState.password}
+                        error={fieldErrorState.password}
+                    // required  // make a '*' to indicate it is a mandatory field
+                    />
+                    <Button
+                        variant="contained"
+                        type='submit'
+                        disabled={loginMutation.isLoading}>
+                        {loginMutation.isLoading ? "Loading..." : "Submit"}
+                    </Button>
+                </div>
+            </form>
+        </>
+    )
 }
 

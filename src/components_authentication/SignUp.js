@@ -56,10 +56,10 @@ export default function SignUp() {
       console.log(formState)
 
       signupMutation.mutate({
-          username: formState.username,
-          password: formState.password,
-          hobbies: formState.hobbies,  
-          age: formState.age
+        username: formState.username,
+        password: formState.password,
+        hobbies: formState.hobbies,
+        age: formState.age
       });
     }
   }
@@ -125,7 +125,10 @@ export default function SignUp() {
             value={formState.age}
             error={fieldErrorState.age}
           />
-          <Button variant="contained" type='submit'>
+          <Button
+            variant="contained"
+            type='submit'
+            disabled={signupMutation.isLoading}>
             {signupMutation.isLoading ? "Loading..." : "Submit"}
           </Button>
         </div>
