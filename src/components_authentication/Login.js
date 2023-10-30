@@ -8,16 +8,26 @@ import { useNavigate } from "react-router-dom"
 
 export default function Login() {
 
+    const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate()
 
     const loginMutation = useMutation({
         mutationFn: login_post,
         onSuccess: data => {
-            // if (?????????) {
-            //    navigate("/You_are_logged", { state: "????????" })
-            // }
+            if (data.error) {
+                // Set the error message
+                setErrorMessage(data.error);
+            } else {
+                // Login was successful, navigate to the logged-in page
+                navigate("/You_are_logged", { state: { username: data.username } });
+            }
         },
+        onError: error => {
+            // Handle an error response (status code outside 2xx)
+            setErrorMessage(error.message);
+        }
     });
+
 
     const [formState, setFormState] = useState({
         username: '',
@@ -61,6 +71,15 @@ export default function Login() {
                 Log in:
             </Typography>
             <br />
+
+            {errorMessage && (  // Conditionally render the error message
+                <>
+                    <Typography variant="body2" color="error">
+                        {errorMessage}
+                    </Typography>
+                    <br />
+                </>
+            )}
 
             <form onSubmit={handleSubmit} noValidate autoComplete='off'>
                 {/* noValidate makes the browser not use its built-in validation messages as we want to do it ourselves, 

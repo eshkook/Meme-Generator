@@ -1,5 +1,22 @@
 import axios from "axios"
 
+// export function signup_post({ username, password, hobbies, age }) {
+//   return axios
+//     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/signup/", {
+//       username,
+//       password,
+//       hobbies,
+//       age
+//     })
+//     .then(res => {
+//       if (!res.status || res.status < 200 || res.status >= 300) {
+//         // Throw an error if the status code is not in the 2xx range
+//         throw new Error(`Request failed with status code ${res.status}`);
+//       }
+//       return res.data;
+//     });
+// }
+
 export function signup_post({ username, password, hobbies, age }) {
   return axios
     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/signup/", {
@@ -14,30 +31,56 @@ export function signup_post({ username, password, hobbies, age }) {
         throw new Error(`Request failed with status code ${res.status}`);
       }
       return res.data;
+    })
+    .catch(error => {
+        // Propagate the error to react-query
+        throw error.response ? error.response.data : new Error('Network error');
     });
 }
 
+
 export function login_post({ username, password }) { 
   return axios
-    .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/login/", {
-      username,
-      password
-    })
-    .then(res => res.data)
+      .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/login/", {
+          username,
+          password
+      })
+      .then(res => res.data)
+      .catch(error => {
+          // Propagate the error to react-query
+          throw error.response ? error.response.data : new Error('Network error');
+      });
 }
+
+// export function logout_post() { 
+//   return axios.post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/")
+//       .then(res => res.data);
+// }
 
 export function logout_post() { 
   return axios
-    .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/", {
-      
+    .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/")
+    .then(res => {
+      if (!res.status || res.status < 200 || res.status >= 300) {
+        // Throw an error if the status code is not in the 2xx range
+        throw new Error(`Request failed with status code ${res.status}`);
+      }
+      return res.data;
     })
-    .then(res => res.data)
+    .catch(error => {
+        // Propagate the error to react-query
+        throw error.response ? error.response.data : new Error('Network error');
+    });
 }
 
 export function get_timestamp() {
   return axios
-  .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/gettimestamp/', { timeout: 5000 })
-  .then(res => res.data)
+    .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/gettimestamp/', { timeout: 5000 })
+    .then(res => res.data)
+    .catch(error => {
+        // Propagate the error to react-query
+        throw error.response ? error.response.data : new Error('Network error');
+    });
 }
 
 export function getImage() {

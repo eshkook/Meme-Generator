@@ -19,18 +19,39 @@ export default function You_are_logged() {
 
     const queryClient = useQueryClient()
 
+    const [timestampError, setTimestampError] = useState(null);
+
+    // const timestampQuery = useQuery({
+    //     queryKey: ["timestamp"],
+    //     queryFn: get_timestamp,
+    //     enabled: shouldFetch // prevent fetching on mount
+    // })
+
     const timestampQuery = useQuery({
         queryKey: ["timestamp"],
         queryFn: get_timestamp,
+        onError: error => {
+            // Assuming the error object has a message property
+            setTimestampError(error.message);
+        },
         enabled: shouldFetch // prevent fetching on mount
-    })
+    });
+
+    const [logoutError, setLogoutError] = useState(null);
 
     const logoutMutation = useMutation({
         mutationFn: logout_post,
         onSuccess: data => {
-            // if (?????????) {
-            //    navigate("/authentication", { state: "????????" })
-            // }
+            if (data.detail === "Logout successful.") {
+                navigate("/authentication");
+            } else {
+                // Handle any unexpected successful response
+                setLogoutError("Logout failed. Please try again.");
+            }
+        },
+        onError: error => {
+            // Assuming the error object has a message property
+            setLogoutError(error.message);
         },
     });
 
@@ -40,6 +61,25 @@ export default function You_are_logged() {
                 You are logged!
             </Typography>
             <br />
+
+            {timestampError && (  // Conditionally render the error message
+                <>
+                    <Typography variant="body2" color="error">
+                        {timestampError}
+                    </Typography>
+                    <br />
+                </>
+            )}
+
+            {logoutError && (  // Conditionally render the error message
+                <>
+                    <Typography variant="body2" color="error">
+                        {logoutError}
+                    </Typography>
+                    <br />
+                </>
+            )}
+
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button
                     variant="contained"
