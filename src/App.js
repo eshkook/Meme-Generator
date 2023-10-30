@@ -61,7 +61,7 @@ export default function App() {
           </li>
         </ul>
       </nav>
-      {location.state} {/* it shows on screen even without tags like<p></p> */}
+      {/* {location.state} it shows on screen even without tags like<p></p> */}
       <Routes>
         <Route element={<OverAllLayout />}> {/* without 'path' makes it relevant to all the paths children */}
           <Route path="/" element={<Home />} />

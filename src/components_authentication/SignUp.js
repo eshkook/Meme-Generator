@@ -20,7 +20,7 @@ export default function SignUp() {
         setErrorMessage(data.error);
       } else {
         // Signup and login were successful, navigate to the logged in page
-        navigate("/You_are_logged", { state: { username: data.username } });
+        navigate("/youarelogged", { state: { username: data.username } });
       }
     },
     onError: error => {

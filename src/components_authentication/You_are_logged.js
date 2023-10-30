@@ -54,7 +54,7 @@ export default function You_are_logged() {
             setLogoutError(error.message);
         },
     });
-
+    
     return (
         <>
             <Typography variant="subtitle1" component="h1">
