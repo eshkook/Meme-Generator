@@ -23,7 +23,7 @@ export default function You_are_logged() {
 
     const responseCountQuery = useQuery({
         queryKey: ["response_count"],
-        queryFn: ()=>get_response_count,
+        queryFn: ()=>get_response_count(responseCountQuery.data),
         onError: error => {
             setCountError(error);
             console.log(error)
@@ -84,6 +84,7 @@ export default function You_are_logged() {
                     {logoutMutation.isLoading ? "Loading..." : "Log out"}
                 </Button>
             </ButtonGroup>
+            <br />
             <br />
             <Typography variant="subtitle1" component="h2">
                 Count: {responseCountQuery.data}

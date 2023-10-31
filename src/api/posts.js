@@ -1,28 +1,5 @@
 import axios from "axios"
 
-// export function signup_post({ username, password, hobbies, age }) {
-//   return axios
-//     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/signup/", {
-//       username,
-//       password,
-//       hobbies,
-//       age
-//     })
-//     .then(res => {
-//       if (!res.status || res.status < 200 || res.status >= 300) {
-//         // Throw an error if the status code is not in the 2xx range
-//         throw new Error(`Request failed with status code ${res.status}`);
-//       }
-//       return res.data;
-//     })
-//     .catch(error => {
-//         // Propagate the error to react-query
-//         throw error.response ? error.response.data : new Error('Network error');
-//     });
-// }
-
-import axios from 'axios';
-
 export function signup_post({ username, password, hobbies, age }) {
   return axios
     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/signup/", {
