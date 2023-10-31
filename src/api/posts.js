@@ -51,30 +51,40 @@ export function login_post({ username, password }) {
       });
 }
 
+export function logout_post() { 
+  return axios
+      .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/")
+      .then(res => res.data)
+      .catch(error => {
+          // Propagate the error to react-query
+          throw error.response ? error.response.data : new Error('Network error');
+      });
+}
+
 // export function logout_post() { 
 //   return axios.post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/")
 //       .then(res => res.data);
 // }
 
-export function logout_post() { 
-  return axios
-    .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/")
-    .then(res => {
-      if (!res.status || res.status < 200 || res.status >= 300) {
-        // Throw an error if the status code is not in the 2xx range
-        throw new Error(`Request failed with status code ${res.status}`);
-      }
-      return res.data;
-    })
-    .catch(error => {
-        // Propagate the error to react-query
-        throw error.response ? error.response.data : new Error('Network error');
-    });
-}
+// export function logout_post() { 
+//   return axios
+//     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/")
+//     .then(res => {
+//       if (!res.status || res.status < 200 || res.status >= 300) {
+//         // Throw an error if the status code is not in the 2xx range
+//         throw new Error(`Request failed with status code ${res.status}`);
+//       }
+//       return res.data;
+//     })
+//     .catch(error => {
+//         // Propagate the error to react-query
+//         throw error.response ? error.response.data : new Error('Network error');
+//     });
+// }
 
-export function get_response_count() {
+export function get_response_count({ count }) {
   return axios
-    .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/getresponsecount/', { timeout: 5000 })
+    .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/getresponsecount/', { count })
     .then(res => res.data)
     .catch(error => {
         // Propagate the error to react-query

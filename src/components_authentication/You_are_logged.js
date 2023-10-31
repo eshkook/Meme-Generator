@@ -10,22 +10,22 @@ export default function You_are_logged() {
 
     const [shouldFetch, setShouldFetch] = useState(false);
 
-    const handleGetTimestamp = () => {
+    const handleGetCount = () => {
         setShouldFetch(true);  
-        queryClient.invalidateQueries(["timestamp"]) 
+        queryClient.invalidateQueries(["response_count"]) 
     };
 
     const navigate = useNavigate()
 
     const queryClient = useQueryClient()
 
-    const [timestampError, setTimestampError] = useState(null);
+    const [countError, setCountError] = useState(null);
 
     const responseCountQuery = useQuery({
-        queryKey: ["timestamp"],
-        queryFn: get_response_count,
+        queryKey: ["response_count"],
+        queryFn: ()=>get_response_count,
         onError: error => {
-            setTimestampError(error);
+            setCountError(error);
             console.log(error)
         },
         enabled: shouldFetch // prevent fetching on mount
@@ -33,20 +33,31 @@ export default function You_are_logged() {
 
     const [logoutError, setLogoutError] = useState(null);
 
+    // const logoutMutation = useMutation({
+    //     mutationFn: logout_post,
+    //     onSuccess: data => {
+    //         if (data.detail === "Logout successful.") {
+    //             navigate("/authentication");
+    //         } else {
+    //             // Handle any unexpected successful response
+    //             setLogoutError("Logout failed. Please try again.");
+    //         }
+    //     },
+    //     onError: error => {
+    //         // Assuming the error object has a message property
+    //         setLogoutError(error.message);
+    //     },
+    // });
+
     const logoutMutation = useMutation({
         mutationFn: logout_post,
         onSuccess: data => {
-            if (data.detail === "Logout successful.") {
-                navigate("/authentication");
-            } else {
-                // Handle any unexpected successful response
-                setLogoutError("Logout failed. Please try again.");
-            }
+            navigate("/authentication");
         },
         onError: error => {
-            // Assuming the error object has a message property
-            setLogoutError(error.message);
-        },
+            setLogoutError(error);
+            console.log(error)
+        }
     });
     
     return (
@@ -56,10 +67,10 @@ export default function You_are_logged() {
             </Typography>
             <br />
 
-            {timestampError && (  // Conditionally render the error message
+            {countError && (  // Conditionally render the error message
                 <>
                     <Typography variant="body2" color="error">
-                        {timestampError}
+                        Error occured in count
                     </Typography>
                     <br />
                 </>
@@ -68,7 +79,7 @@ export default function You_are_logged() {
             {logoutError && (  // Conditionally render the error message
                 <>
                     <Typography variant="body2" color="error">
-                        {logoutError}
+                        Error occured in logout
                     </Typography>
                     <br />
                 </>
@@ -77,8 +88,7 @@ export default function You_are_logged() {
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button
                     variant="contained"
-                    // onClick={() => queryClient.invalidateQueries(["timestamp"])}
-                    onClick={handleGetTimestamp}
+                    onClick={handleGetCount}
                     disabled={shouldFetch && responseCountQuery.isLoading}>
                     {(shouldFetch && responseCountQuery.isLoading) ? "Loading..." : "Get timestamp"}
                 </Button>
