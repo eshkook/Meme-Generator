@@ -14,17 +14,11 @@ export default function Login() {
     const loginMutation = useMutation({
         mutationFn: login_post,
         onSuccess: data => {
-            if (data.error) {
-                // Set the error message
-                setErrorMessage(data.error);
-            } else {
-                // Login was successful, navigate to the logged-in page
-                navigate("/You_are_logged", { state: { username: data.username } });
-            }
+            navigate("/youarelogged", { state: { username: data.username } });
         },
         onError: error => {
-            // Handle an error response (status code outside 2xx)
-            setErrorMessage(error.message);
+            setErrorMessage(error);
+            console.log(error)
         }
     });
 
@@ -71,10 +65,10 @@ export default function Login() {
             </Typography>
             <br />
 
-            {errorMessage && (  // Conditionally render the error message
+            {(errorMessage && errorMessage.error == 'Invalid credentials') && (  // Conditionally render the error message
                 <>
                     <Typography variant="body2" color="error">
-                        {errorMessage}
+                        Invalid credentials
                     </Typography>
                     <br />
                 </>

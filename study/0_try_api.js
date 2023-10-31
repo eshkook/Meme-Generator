@@ -1,4 +1,4 @@
-const axios = require('axios')
+// const axios = require('axios')
 // fetch("http://swapi.dev/api/people/1")
 //   .then(res => res.json())
 //   .then(data => console.log(data))
@@ -23,9 +23,9 @@ const axios = require('axios')
 
 // getRoom()
 
-fetch("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/1")
-.then(res => res.json())
-.then(data => console.log(data)) 
+// fetch("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/1")
+// .then(res => res.json())
+// .then(data => console.log(data)) 
 
 // axios
 //     .get('http://127.0.0.1:8000/api/image/', { timeout: 5000 }) 
@@ -44,3 +44,5 @@ fetch("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/posts/1")
 //         // Save to a file (for Node.js)
 //         fs.writeFileSync('data.json', jsonString, 'utf8');
 //       })
+a={w:1}
+console.log(null.ww==9)
