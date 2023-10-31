@@ -4,33 +4,52 @@ import Typography from '@mui/material/Typography'
 import { logout_post, get_response_count } from "../api/posts.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 
 export default function You_are_logged() {
 
-    const [shouldFetch, setShouldFetch] = useState(false);
+    // const [shouldFetch, setShouldFetch] = useState(false);
 
-    const handleGetCount = () => {
-        setShouldFetch(true);  
-        queryClient.invalidateQueries(["response_count"]) 
-    };
+    // const handleGetCount = () => {
+    //     setShouldFetch(true);
+    //     queryClient.invalidateQueries(["response_count"])
+    // };
+
+    // const handleGetCount = () => {
+    //     responseCountMutation.mutate();
+    // };
 
     const navigate = useNavigate()
 
-    const queryClient = useQueryClient()
+    // const queryClient = useQueryClient()
 
     const [countError, setCountError] = useState(null);
 
-    const responseCountQuery = useQuery({
-        queryKey: ["response_count"],
-        queryFn: ()=>get_response_count(responseCountQuery.data),
-        onError: error => {
-            setCountError(error);
-            console.log(error)
-        },
-        enabled: shouldFetch, // prevent fetching on mount,
-        initialData: 0
-    });
+    // const responseCountQuery = useQuery({
+    //     queryKey: ["response_count"],
+    //     queryFn: ()=>get_response_count(responseCountQuery.data),
+    //     onError: error => {
+    //         setCountError(error);
+    //         console.log(error)
+    //     },
+    //     enabled: shouldFetch, // prevent fetching on mount,
+    //     initialData: 0
+    // });
+
+    const [count, setCount] = useState(0);
+
+    const responseCountMutation = useMutation(
+        {
+            mutationFn: () => get_response_count(count),
+            onSuccess: data => {
+                setCount(data.count);
+            },
+            onError: error => {
+                setCountError(error);
+                console.log(error)
+            }
+        }
+    );
 
     const [logoutError, setLogoutError] = useState(null);
 
@@ -44,7 +63,7 @@ export default function You_are_logged() {
             console.log(error)
         }
     });
-    
+
     return (
         <>
             <Typography variant="subtitle1" component="h1">
@@ -73,13 +92,13 @@ export default function You_are_logged() {
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button
                     variant="contained"
-                    onClick={handleGetCount}
-                    disabled={shouldFetch && responseCountQuery.isLoading}>
-                    {(shouldFetch && responseCountQuery.isLoading) ? "Loading..." : "Get Response Count"}
+                    onClick={responseCountMutation.mutate}
+                    disabled={responseCountMutation.isLoading}>
+                    {(responseCountMutation.isLoading) ? "Loading..." : "Get Response Count"}
                 </Button>
                 <Button
                     variant="contained"
-                    onClick={() => logoutMutation.mutate()}
+                    onClick={logoutMutation.mutate}
                     disabled={logoutMutation.isLoading}>
                     {logoutMutation.isLoading ? "Loading..." : "Log out"}
                 </Button>
@@ -87,9 +106,8 @@ export default function You_are_logged() {
             <br />
             <br />
             <Typography variant="subtitle1" component="h2">
-                Count: {responseCountQuery.data}
+                Count: {count}
             </Typography>
         </>
-
     )
 }

@@ -59,9 +59,19 @@ export function logout_post() {
 //     });
 // }
 
-export function get_response_count({ count }) {
+// export function get_response_count({ count }) {
+//   return axios
+//     .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/getresponsecount/', { count })
+//     .then(res => res.data)
+//     .catch(error => {
+//         // Propagate the error to react-query
+//         throw error.response ? error.response.data : new Error('Network error');
+//     });
+// }
+
+export function get_response_count(count) {
   return axios
-    .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/getresponsecount/', { count })
+    .post('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/getresponsecount/', { count })
     .then(res => res.data)
     .catch(error => {
         // Propagate the error to react-query
