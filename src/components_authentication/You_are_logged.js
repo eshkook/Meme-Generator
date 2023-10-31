@@ -28,26 +28,11 @@ export default function You_are_logged() {
             setCountError(error);
             console.log(error)
         },
-        enabled: shouldFetch // prevent fetching on mount
+        enabled: shouldFetch, // prevent fetching on mount,
+        initialData: 0
     });
 
     const [logoutError, setLogoutError] = useState(null);
-
-    // const logoutMutation = useMutation({
-    //     mutationFn: logout_post,
-    //     onSuccess: data => {
-    //         if (data.detail === "Logout successful.") {
-    //             navigate("/authentication");
-    //         } else {
-    //             // Handle any unexpected successful response
-    //             setLogoutError("Logout failed. Please try again.");
-    //         }
-    //     },
-    //     onError: error => {
-    //         // Assuming the error object has a message property
-    //         setLogoutError(error.message);
-    //     },
-    // });
 
     const logoutMutation = useMutation({
         mutationFn: logout_post,
@@ -90,7 +75,7 @@ export default function You_are_logged() {
                     variant="contained"
                     onClick={handleGetCount}
                     disabled={shouldFetch && responseCountQuery.isLoading}>
-                    {(shouldFetch && responseCountQuery.isLoading) ? "Loading..." : "Get timestamp"}
+                    {(shouldFetch && responseCountQuery.isLoading) ? "Loading..." : "Get Response Count"}
                 </Button>
                 <Button
                     variant="contained"
@@ -101,7 +86,7 @@ export default function You_are_logged() {
             </ButtonGroup>
             <br />
             <Typography variant="subtitle1" component="h2">
-                {responseCountQuery.data && (`Count: ${responseCountQuery.data}`)}
+                Count: {responseCountQuery.data}
             </Typography>
         </>
 
