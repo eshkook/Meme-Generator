@@ -80,8 +80,6 @@ export default function App() {
           <Route path="*" element={<NotFound />} /> {/* any sub-route that is not one of the above will fall here */}
         </Route>
       </Routes>
-
-
     </>
   )
 }

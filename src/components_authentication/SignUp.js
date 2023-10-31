@@ -15,18 +15,11 @@ export default function SignUp() {
   const signupMutation = useMutation({
     mutationFn: signup_post,
     onSuccess: data => {
-      if (data.error) {
-        // Set the error message
-        setErrorMessage(data.error);
-      } else {
-        // Signup and login were successful, navigate to the logged in page
-        navigate("/youarelogged", { state: { username: data.username } });
-      }
+      navigate("/youarelogged", { state: { username: data.username } });
     },
     onError: error => {
-      // Handle an error response (status code outside 2xx)
-      // Assuming the error object has a message property
-      setErrorMessage(error.message);
+      setErrorMessage(error);
+      console.log(error)
     }
   });
 
@@ -82,10 +75,19 @@ export default function SignUp() {
       </Typography>
       <br />
 
-      {errorMessage && (
+      {/* {errorMessage && (
         <>
           <Typography color="error">
             {errorMessage}
+          </Typography>
+          <br />
+        </>
+      )} */}
+
+      {(errorMessage && errorMessage.error == 'Invalid credentials') && (  // Conditionally render the error message
+        <>
+          <Typography variant="body2" color="error">
+            Username is already taken
           </Typography>
           <br />
         </>

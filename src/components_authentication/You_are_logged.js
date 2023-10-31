@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Typography from '@mui/material/Typography'
-import { logout_post, get_timestamp } from "../api/posts.js";
+import { logout_post, get_response_count } from "../api/posts.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
@@ -21,18 +21,12 @@ export default function You_are_logged() {
 
     const [timestampError, setTimestampError] = useState(null);
 
-    // const timestampQuery = useQuery({
-    //     queryKey: ["timestamp"],
-    //     queryFn: get_timestamp,
-    //     enabled: shouldFetch // prevent fetching on mount
-    // })
-
-    const timestampQuery = useQuery({
+    const responseCountQuery = useQuery({
         queryKey: ["timestamp"],
-        queryFn: get_timestamp,
+        queryFn: get_response_count,
         onError: error => {
-            // Assuming the error object has a message property
-            setTimestampError(error.message);
+            setTimestampError(error);
+            console.log(error)
         },
         enabled: shouldFetch // prevent fetching on mount
     });
@@ -85,8 +79,8 @@ export default function You_are_logged() {
                     variant="contained"
                     // onClick={() => queryClient.invalidateQueries(["timestamp"])}
                     onClick={handleGetTimestamp}
-                    disabled={shouldFetch && timestampQuery.isLoading}>
-                    {(shouldFetch && timestampQuery.isLoading) ? "Loading..." : "Get timestamp"}
+                    disabled={shouldFetch && responseCountQuery.isLoading}>
+                    {(shouldFetch && responseCountQuery.isLoading) ? "Loading..." : "Get timestamp"}
                 </Button>
                 <Button
                     variant="contained"
@@ -97,7 +91,7 @@ export default function You_are_logged() {
             </ButtonGroup>
             <br />
             <Typography variant="subtitle1" component="h2">
-                {timestampQuery.data && (`Timestamp: ${timestampQuery.data}`)}
+                {responseCountQuery.data && (`Count: ${responseCountQuery.data}`)}
             </Typography>
         </>
 
