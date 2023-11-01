@@ -20,7 +20,7 @@ export default function Authentication() {
                 </Link>
                 {/* <Link to={'/youarelogged'} >
                     <Button>Temp Logging</Button>
-                </Link> */}
+                </Link>  */}
             </ButtonGroup>
         </>
     );
