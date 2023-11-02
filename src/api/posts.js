@@ -1,5 +1,22 @@
 import axios from "axios"
 
+// Get CSRF token from cookie
+function getCsrfToken() {
+  let csrfToken;
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+    if (cookie.startsWith('csrftoken=')) {
+      csrfToken = cookie.substring('csrftoken='.length, cookie.length);
+      break;
+    }
+  }
+  return csrfToken;
+}
+
+// Configure axios
+axios.defaults.headers.post['X-CSRFToken'] = getCsrfToken();
+
 export function signup_post({ username, password, hobbies, age }) {
   return axios
     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/signup/", {
@@ -74,6 +91,8 @@ export function get_response_count(count) {
       throw error.response ? error.response.data : new Error('Network error');
     });
 }
+
+
 
 
 export function getImage() {
