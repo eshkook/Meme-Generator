@@ -1,7 +1,7 @@
 import axios from "axios"
 
 // Get CSRF token from cookie
-function getCsrfToken() {
+function getCsrfToken() {///////////////////////////////////////////////////////////////////////////////////
   let csrfToken;
   const cookies = document.cookie.split(';');
   for (let i = 0; i < cookies.length; i++) {
@@ -15,7 +15,7 @@ function getCsrfToken() {
 }
 
 // Configure axios
-axios.defaults.headers.post['X-CSRFToken'] = getCsrfToken();
+axios.defaults.headers.post['X-CSRFToken'] = getCsrfToken();///////////////////////////////////////////////////
 
 export function signup_post({ username, password, hobbies, age }) {
   return axios
@@ -45,55 +45,31 @@ export function login_post({ username, password }) {
     });
 }
 
-// export function logout_post() {
-//   return axios
-//     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/")
-//     .then(res => res.data)
-//     .catch(error => {
-//       // Propagate the error to react-query
-//       throw error.response ? error.response.data : new Error('Network error');
-//     });
-// }
-
 export function logout_post() {
   return axios
     .post(
       "https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/",
-      {},
-      { withCredentials: true }  // Include this option to send cookies
+      {},///////////////////////////////////////////////////////////
+      { withCredentials: true }  // Include this option to send cookies/////////////////////////////////////////////////////
     )
     .then(res => res.data)
     .catch(error => {
       throw error.response ? error.response.data : new Error('Network error');
     });
 }
-
-
-// export function get_response_count(count) {
-//   return axios
-//     .post('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/getresponsecount/', { count })
-//     .then(res => res.data)
-//     .catch(error => {
-//         // Propagate the error to react-query
-//         throw error.response ? error.response.data : new Error('Network error');
-//     });
-// }
 
 export function get_response_count(count) {
   return axios
     .post(
       'https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/getresponsecount/',
       { count },
-      { withCredentials: true }  // Include this option to send cookies
+      { withCredentials: true }  // Include this option to send cookies/////////////////////////////////////////
     )
     .then(res => res.data)
     .catch(error => {
       throw error.response ? error.response.data : new Error('Network error');
     });
 }
-
-
-
 
 export function getImage() {
   return axios
