@@ -6,6 +6,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 
+import { useEffect } from "react";
+import axios from 'axios';
+
 export default function You_are_logged() {
 
     // const [shouldFetch, setShouldFetch] = useState(false);
@@ -20,6 +23,24 @@ export default function You_are_logged() {
     // };
 
     const navigate = useNavigate()
+
+    // Function to check authentication status
+    const checkAuthentication = async () => {
+        try {
+          const response = await axios.get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/authenticated');
+          if (response.data.isAuthenticated !== 'success') {
+            navigate('/login'); // Redirect to login if not authenticated
+          }
+        } catch (error) {
+          console.error('Error checking authentication status', error);
+          navigate('/login'); // Redirect to login on error
+        }
+      };
+      
+    // Call this function when the component mounts
+    useEffect(() => {
+        checkAuthentication();
+    }, []);
 
     // const queryClient = useQueryClient()
 

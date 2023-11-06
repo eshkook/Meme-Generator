@@ -6,7 +6,39 @@ import { useState } from "react"
 import { login_post } from "../api/posts.js";
 import { useNavigate } from "react-router-dom"
 
+import { useEffect } from "react";
+import axios from 'axios';
+
 export default function Login() {
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Function to set CSRF token
+    const getCsrfToken = async () => {
+        try {
+            await axios.get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/csrf_cookie');
+        } catch (error) {
+            console.error('Error getting CSRF token', error);
+        }
+    };
+
+    // Function to check authentication status
+    const checkAuthentication = async () => {
+        try {
+            const response = await axios.get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/authenticated');
+            if (response.data.isAuthenticated === 'success') {
+                navigate('/youarelogged'); // Change this to your authenticated user's landing page
+            }
+        } catch (error) {
+            console.error('Error checking authentication status', error);
+        }
+    };
+
+    // Call these functions when the component mounts
+    useEffect(() => {
+        getCsrfToken();
+        checkAuthentication();
+    }, []);
+    ////////////////////////////////////////////////////////////////////////////
 
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate()
