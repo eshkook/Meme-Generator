@@ -64,6 +64,19 @@ export default function You_are_logged() {
         }
     });
 
+    const [deleteError, setDeleteError] = useState(null);
+
+    const deleteMutation = useMutation({
+        mutationFn: delete_post,
+        onSuccess: data => {
+            navigate("/authentication");
+        },
+        onError: error => {
+            setDeleteError(error);
+            console.log(error)
+        }
+    });
+
     return (
         <>
             <Typography variant="subtitle1" component="h1">
@@ -89,6 +102,15 @@ export default function You_are_logged() {
                 </>
             )}
 
+            {deleteError && (  // Conditionally render the error message
+                <>
+                    <Typography variant="body2" color="error">
+                        Error occured in delete
+                    </Typography>
+                    <br />
+                </>
+            )}
+
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button
                     variant="contained"
@@ -101,6 +123,12 @@ export default function You_are_logged() {
                     onClick={logoutMutation.mutate}
                     disabled={logoutMutation.isLoading}>
                     {logoutMutation.isLoading ? "Loading..." : "Log out"}
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={deleteMutation.mutate}
+                    disabled={deleteMutation.isLoading}>
+                    {deleteMutation.isLoading ? "Loading..." : "Delete account"}
                 </Button>
             </ButtonGroup>
             <br />

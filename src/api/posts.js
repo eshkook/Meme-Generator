@@ -1,21 +1,21 @@
-import axios from "axios"
+import axios from 'axios';
 
-// Get CSRF token from cookie
-function getCsrfToken() {///////////////////////////////////////////////////////////////////////////////////
-  let csrfToken;
-  const cookies = document.cookie.split(';');
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith('csrftoken=')) {
-      csrfToken = cookie.substring('csrftoken='.length, cookie.length);
-      break;
-    }
-  }
-  return csrfToken;
-}
+// // Get CSRF token from cookie
+// function getCsrfToken() {///////////////////////////////////////////////////////////////////////////////////
+//   let csrfToken;
+//   const cookies = document.cookie.split(';');
+//   for (let i = 0; i < cookies.length; i++) {
+//     const cookie = cookies[i].trim();
+//     if (cookie.startsWith('csrftoken=')) {
+//       csrfToken = cookie.substring('csrftoken='.length, cookie.length);
+//       break;
+//     }
+//   }
+//   return csrfToken;
+// }
 
-// Configure axios
-axios.defaults.headers.post['X-CSRFToken'] = getCsrfToken();///////////////////////////////////////////////////
+// // Configure axios
+// axios.defaults.headers.post['X-CSRFToken'] = getCsrfToken();///////////////////////////////////////////////////
 
 export function signup_post({ username, password, hobbies, age }) {
   return axios
@@ -32,13 +32,33 @@ export function signup_post({ username, password, hobbies, age }) {
     });
 }
 
+// export function login_post({ username, password }) {
+//   return axios
+//     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/login/", {
+//       username,
+//       password
+//     })
+//     .then(res => res.data)
+//     .catch(error => {
+//       // Propagate the error to react-query
+//       throw error.response ? error.response.data : new Error('Network error');
+//     });
+// }
+
 export function login_post({ username, password }) {
+  // Configure axios to send cookies with every request
+  axios.defaults.withCredentials = true;
+
   return axios
     .post("https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/login/", {
       username,
       password
     })
-    .then(res => res.data)
+    .then(res => {
+      // Assuming the server sets the session cookie automatically
+      // and you just need to check if the login was successful
+      return res.data;
+    })
     .catch(error => {
       // Propagate the error to react-query
       throw error.response ? error.response.data : new Error('Network error');
@@ -49,6 +69,19 @@ export function logout_post() {
   return axios
     .post(
       "https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/logout/",
+      {},///////////////////////////////////////////////////////////
+      { withCredentials: true }  // Include this option to send cookies/////////////////////////////////////////////////////
+    )
+    .then(res => res.data)
+    .catch(error => {
+      throw error.response ? error.response.data : new Error('Network error');
+    });
+}
+
+export function delete_post() {
+  return axios
+    .post(
+      "https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/delete/",
       {},///////////////////////////////////////////////////////////
       { withCredentials: true }  // Include this option to send cookies/////////////////////////////////////////////////////
     )
