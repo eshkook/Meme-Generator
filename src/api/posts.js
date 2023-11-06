@@ -58,9 +58,8 @@ export function logout_post() {
 export function delete_post() {
   const csrfToken = Cookies.get('csrftoken'); // Get the CSRF token from the cookie
   return axios
-    .post(
+    .delete( // Changed from .post to .delete
       "https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/delete/",
-      {}, // Data payload should be empty for logout
       {
         headers: csrfToken ? { 'X-CSRFToken': csrfToken } : undefined
       }
@@ -72,11 +71,15 @@ export function delete_post() {
 }
 
 export function get_response_count(count) {
+  const csrfToken = Cookies.get('csrftoken'); // Get the CSRF token from the cookie
+
   return axios
     .post(
       'https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/getresponsecount/',
       { count },
-      { withCredentials: true }  // Include this option to send cookies/////////////////////////////////////////
+      {
+        headers: csrfToken ? { 'X-CSRFToken': csrfToken } : undefined
+      }
     )
     .then(res => res.data)
     .catch(error => {
