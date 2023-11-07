@@ -11,10 +11,6 @@ import axios from 'axios';
 
 export default function You_are_logged() {
 
-    const handleGetCount = () => {
-        responseCountMutation.mutate();
-    };
-
     const navigate = useNavigate()
 
     // Function to check authentication status

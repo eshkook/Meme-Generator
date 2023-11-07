@@ -44,10 +44,10 @@ export default function Home() {
       <button onClick={() => setCurrentPage(<Form />)}>
         Form
       </button>
-      <br />
-      {/* <button onClick={() => setCurrentPage(<Authentication />)}>
+      <button onClick={() => setCurrentPage(<Authentication />)}>
         Authentication
-  </button>*/}
+      </button>
+      <br />
       <button onClick={() => setCurrentPage(<Query_1 />)}>
         Query 1
       </button>

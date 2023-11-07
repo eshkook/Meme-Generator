@@ -73,10 +73,10 @@ export default function App() {
             <Route index element={<Ultra />} />
           </Route>
           <Route path="/zebra/*" element={<ZebraRoutes />} /> {/* routes themselves are imported */}
-          {/* <Route path="/authentication" element={<Authentication />} />
+          <Route path="/authentication" element={<Authentication />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/youarelogged" element={<You_are_logged />} /> */}
+          <Route path="/youarelogged" element={<You_are_logged />} />
           <Route path="*" element={<NotFound />} /> {/* any sub-route that is not one of the above will fall here */}
         </Route>
       </Routes>
