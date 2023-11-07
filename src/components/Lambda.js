@@ -28,6 +28,12 @@ export default function Lambda() {
         initialData: 0
     });
 
+    // console.log('isLoading:', calendarQuery.isLoading);
+    // if (calendarQuery.isLoading) return <h1>Loading...</h1>
+    // if (calendarQuery.isError) {
+    //     return <pre>11111111111111 {JSON.stringify(calendarQuery.error)}</pre>
+    // }
+
     return (
         <>
             {calendarError && (  // Conditionally render the error message
@@ -44,7 +50,7 @@ export default function Lambda() {
                 disabled={calendarQuery.isLoading}>
                 {(calendarQuery.isLoading) ? "Loading..." : "Get Calendar"}
             </Button>
-            {shouldFetch && (  // Conditionally render the error message
+            {(shouldFetch && !calendarQuery.isLoading) && (  // Conditionally render the error message
                 <>
                     <Typography variant="subtitle1" component="h2">
                         Calendar: {calendarQuery.data}
