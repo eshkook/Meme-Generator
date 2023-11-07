@@ -10,6 +10,7 @@ import Meme_2 from "./Meme_2.js"
 import Meme_3 from "./Meme_3.js"
 import Meme_4 from "./Meme_4.js"
 import Meme_5 from "./Meme_5.js"
+import Lambda from "./Lambda.js"
 import Local_Storage from "./Local_Storage.js"
 
 export default function Home() {
@@ -60,6 +61,10 @@ export default function Home() {
       <br />
       <button onClick={() => setCurrentPage(<Local_Storage />)}>
         Local Storage
+      </button>
+      <br />
+      <button onClick={() => setCurrentPage(<Lambda />)}>
+        Lambda
       </button>
       <br />
       {currentPage}

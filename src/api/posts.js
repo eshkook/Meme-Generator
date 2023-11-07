@@ -96,6 +96,15 @@ export function get_random() {
     });
 }
 
+export function get_calendar() {
+  return axios
+    .get('https://xk8r88ywm0.execute-api.eu-west-1.amazonaws.com/botox_function')
+    .then(res => res.data) // Parse the response data as an integer
+    .catch(error => {
+      throw error.response ? error.response.data : new Error('Network error');
+    });
+}
+
 export function getImage() {
   return axios
     .get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/api/image/', { timeout: 5000 })
