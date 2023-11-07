@@ -174,7 +174,7 @@ export default function You_are_logged() {
             {shouldFetch && (  // Conditionally render the error message
                 <>
                     <Typography variant="subtitle1" component="h2">
-                        Press Random: {randomQuery}
+                        Press Random: {randomQuery.data}
                     </Typography>
                     <br />
                 </>

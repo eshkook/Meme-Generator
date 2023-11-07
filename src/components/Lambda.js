@@ -47,7 +47,7 @@ export default function Lambda() {
             {shouldFetch && (  // Conditionally render the error message
                 <>
                     <Typography variant="subtitle1" component="h2">
-                        Calendar: {calendarQuery}
+                        Calendar: {calendarQuery.data}
                     </Typography>
                     <br />
                 </>
