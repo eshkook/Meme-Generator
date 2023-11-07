@@ -107,12 +107,7 @@ export function get_random() {
 
 export function get_calendar() {
   return axios
-    .get('https://xk8r88ywm0.execute-api.eu-west-1.amazonaws.com/botox_function', {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-React-App-Request': 'true' // Custom header to identify the request from React app
-      }
-    })
+    .get('https://xk8r88ywm0.execute-api.eu-west-1.amazonaws.com/botox_function')
     .then(res => res.data)
     .catch(error => {
       throw error.response ? error.response.data : new Error('Network error');
