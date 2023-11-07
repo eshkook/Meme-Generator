@@ -70,7 +70,7 @@ export function delete_post() {
     });
 }
 
-export function get_response_count(count) {
+export function post_response_count(count) {
   const csrfToken = Cookies.get('csrftoken'); // Get the CSRF token from the cookie
 
   return axios
@@ -82,6 +82,15 @@ export function get_response_count(count) {
       }
     )
     .then(res => res.data)
+    .catch(error => {
+      throw error.response ? error.response.data : new Error('Network error');
+    });
+}
+
+export function get_random() {
+  return axios
+    .get('https://your-backend-domain.com/api/random/')
+    .then(res => parseInt(res.data, 10)) // Parse the response data as an integer
     .catch(error => {
       throw error.response ? error.response.data : new Error('Network error');
     });

@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Typography from '@mui/material/Typography'
-import { logout_post, get_response_count } from "../api/posts.js";
+import { logout_post, post_response_count, get_random } from "../api/posts.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
@@ -11,57 +11,59 @@ import axios from 'axios';
 
 export default function You_are_logged() {
 
-    // const [shouldFetch, setShouldFetch] = useState(false);
-
-    // const handleGetCount = () => {
-    //     setShouldFetch(true);
-    //     queryClient.invalidateQueries(["response_count"])
-    // };
-
-    // const handleGetCount = () => {
-    //     responseCountMutation.mutate();
-    // };
+    const handleGetCount = () => {
+        responseCountMutation.mutate();
+    };
 
     const navigate = useNavigate()
 
     // Function to check authentication status
     const checkAuthentication = async () => {
         try {
-          const response = await axios.get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/authenticated');
-          if (response.data.isAuthenticated !== 'success') {
-            navigate('/login'); // Redirect to login if not authenticated
-          }
+            const response = await axios.get('https://v9m2jp3tgz.eu-west-1.awsapprunner.com/authenticated');
+            if (response.data.isAuthenticated !== 'success') {
+                navigate('/login'); // Redirect to login if not authenticated
+            }
         } catch (error) {
-          console.error('Error checking authentication status', error);
-          navigate('/login'); // Redirect to login on error
+            console.error('Error checking authentication status', error);
+            navigate('/login'); // Redirect to login on error
         }
-      };
-      
+    };
+
     // Call this function when the component mounts
     useEffect(() => {
         checkAuthentication();
     }, []);
 
-    // const queryClient = useQueryClient()
+    const queryClient = useQueryClient()
 
     const [countError, setCountError] = useState(null);
 
-    // const responseCountQuery = useQuery({
-    //     queryKey: ["response_count"],
-    //     queryFn: ()=>get_response_count(responseCountQuery.data),
-    //     onError: error => {
-    //         setCountError(error);
-    //         console.log(error)
-    //     },
-    //     enabled: shouldFetch, // prevent fetching on mount,
-    //     initialData: 0
-    // });
+    const [shouldFetch, setShouldFetch] = useState(false);
+
+    const handleGetRandomNumber = () => {
+        setShouldFetch(true);
+        queryClient.invalidateQueries(["random"])
+    };
+
+    const [randomError, setRandomError] = useState(null);
+
+    const randomQuery = useQuery({
+        queryKey: ["random"],
+        queryFn: () => get_random,
+        onError: error => {
+            setRandomError(error);
+            console.log(error)
+        },
+        enabled: shouldFetch, // prevent fetching on mount,
+        initialData: 0
+    });
 
     const [count, setCount] = useState(0);
 
     const responseCountMutation = useMutation(
         {
-            mutationFn: () => get_response_count(count),
+            mutationFn: () => post_response_count(count),
             onSuccess: data => {
                 setCount(data.count);
             },
@@ -114,6 +116,15 @@ export default function You_are_logged() {
                 </>
             )}
 
+            {randomError && (  // Conditionally render the error message
+                <>
+                    <Typography variant="body2" color="error">
+                        Error occured in random
+                    </Typography>
+                    <br />
+                </>
+            )}
+
             {logoutError && (  // Conditionally render the error message
                 <>
                     <Typography variant="body2" color="error">
@@ -141,6 +152,12 @@ export default function You_are_logged() {
                 </Button>
                 <Button
                     variant="contained"
+                    onClick={handleGetRandomNumber}
+                    disabled={randomQuery.isLoading}>
+                    {(randomQuery.isLoading) ? "Loading..." : "Get Random integer"}
+                </Button>
+                <Button
+                    variant="contained"
                     onClick={logoutMutation.mutate}
                     disabled={logoutMutation.isLoading}>
                     {logoutMutation.isLoading ? "Loading..." : "Log out"}
@@ -157,6 +174,16 @@ export default function You_are_logged() {
             <Typography variant="subtitle1" component="h2">
                 Count: {count}
             </Typography>
+            <br />
+            {shouldFetch && (  // Conditionally render the error message
+                <>
+                    <Typography variant="subtitle1" component="h2">
+                        Press Random: {randomQuery}
+                    </Typography>
+                    <br />
+                </>
+            )}
+
         </>
     )
 }
