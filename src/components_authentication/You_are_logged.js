@@ -52,7 +52,7 @@ export default function You_are_logged() {
             console.log(error)
         },
         enabled: shouldFetch, // prevent fetching on mount,
-        // initialData: 0
+        initialData: 0
     });
 
     const [count, setCount] = useState(0);

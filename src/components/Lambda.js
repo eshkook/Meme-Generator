@@ -2,51 +2,52 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography'
 import { get_calendar } from "../api/posts.js";
 import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 
-export default function You_are_logged() {
+export default function Lambda() {
 
     const queryClient = useQueryClient()
 
     const [shouldFetch, setShouldFetch] = useState(false);
 
-    const handleGetRandomNumber = () => {
+    const handleGetCalendar = () => {
         setShouldFetch(true);
-        queryClient.invalidateQueries(["random"])
+        queryClient.invalidateQueries(["calendar"])
     };
 
-    const [randomError, setRandomError] = useState(null);
+    const [calendarError, setCalendarError] = useState(null);
 
-    const randomQuery = useQuery({
-        queryKey: ["random"],
-        queryFn: () => get_calendar,
+    const calendarQuery = useQuery({
+        queryKey: ["calendar"],
+        queryFn: get_calendar,
         onError: error => {
-            setRandomError(error);
+            setCalendarError(error);
             console.log(error)
         },
         enabled: shouldFetch, // prevent fetching on mount,
-        // initialData: 0
+        initialData: 0
     });
 
     return (
         <>
-            {randomError && (  // Conditionally render the error message
+            {calendarError && (  // Conditionally render the error message
                 <>
                     <Typography variant="body2" color="error">
-                        Error occured in random
+                        Error occured during calendar fetching
                     </Typography>
                     <br />
                 </>
             )}
             <Button
                 variant="contained"
-                onClick={handleGetRandomNumber}
-                disabled={randomQuery.isLoading}>
-                {(randomQuery.isLoading) ? "Loading..." : "Get Random integer"}
+                onClick={handleGetCalendar}
+                disabled={calendarQuery.isLoading}>
+                {(calendarQuery.isLoading) ? "Loading..." : "Get Calendar"}
             </Button>
             {shouldFetch && (  // Conditionally render the error message
                 <>
                     <Typography variant="subtitle1" component="h2">
-                        Press Random: {randomQuery}
+                        Calendar: {calendarQuery}
                     </Typography>
                     <br />
                 </>
