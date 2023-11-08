@@ -99,7 +99,7 @@ export function get_random() {
 // export function get_calendar() {
 //   return axios
 //     .get('https://xk8r88ywm0.execute-api.eu-west-1.amazonaws.com/botox_function')
-//     .then(res => res.data) // Parse the response data as an integer
+//     .then(res => res.data)
 //     .catch(error => {
 //       throw error.response ? error.response.data : new Error('Network error');
 //     });
@@ -107,10 +107,16 @@ export function get_random() {
 
 export function get_calendar() {
   return axios
-    .get('https://xk8r88ywm0.execute-api.eu-west-1.amazonaws.com/botox_function')
+    .get('https://xk8r88ywm0.execute-api.eu-west-1.amazonaws.com/botox_function', {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
     .then(res => res.data)
     .catch(error => {
-      throw error.response ? error.response.data : new Error('Network error');
+      // It's better to return a rejected promise here instead of throwing an error
+      // to maintain promise chain consistency
+      return Promise.reject(error.response ? error.response.data : new Error('Network error'));
     });
 }
 
