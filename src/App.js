@@ -10,6 +10,7 @@ import OverAllLayout from "./components_router_dom/OverAllLayout.js"
 import Ultra from "./components_router_dom/Ultra.js"
 import ZebraRoutes from "./components_router_dom/ZebraRoutes.js"
 import Authentication from "./components_authentication/Authentication.js"
+import Authentication_Cognito from "./components_authentication/Authentication_Cognito.js"
 import Login from "./components_authentication/Login.js"
 import SignUp from "./components_authentication/SignUp.js"
 import You_are_logged from "./components_authentication/You_are_logged.js"
@@ -77,6 +78,12 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/youarelogged" element={<You_are_logged />} />
+
+          <Route path="/authentication_cognito" element={<Authentication_Cognito />} />
+          <Route path="/login_cognito" element={<Login_Cognito />} />
+          <Route path="/signup_cognito" element={<SignUp_Cognito />} />
+          <Route path="/youarelogged_cognito" element={<You_are_logged_Cognito />} />
+
           <Route path="*" element={<NotFound />} /> {/* any sub-route that is not one of the above will fall here */}
         </Route>
       </Routes>

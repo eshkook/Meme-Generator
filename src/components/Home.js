@@ -4,6 +4,7 @@ import Query_2 from "../components_query/Query_2.js"
 import Query_3 from "../components_query/Query_3.js"
 import Form from "./Form.js"
 import Authentication from "../components_authentication/Authentication.js"
+import Authentication_Cognito from "../components_authentication/Authentication_Cognito.js"
 import Header from "./Header.js"
 import Meme from "./Meme.js"
 import Meme_2 from "./Meme_2.js"
@@ -11,6 +12,7 @@ import Meme_3 from "./Meme_3.js"
 import Meme_4 from "./Meme_4.js"
 import Meme_5 from "./Meme_5.js"
 import Lambda from "./Lambda.js"
+import Cognito from "./Cognito.js"
 import Local_Storage from "./Local_Storage.js"
 
 export default function Home() {
@@ -65,6 +67,9 @@ export default function Home() {
       <br />
       <button onClick={() => setCurrentPage(<Lambda />)}>
         Lambda
+      </button>
+      <button onClick={() => setCurrentPage(<Authentication_Cognito />)}>
+        Authentication Cognito
       </button>
       <br />
       {currentPage}
