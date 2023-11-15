@@ -109,7 +109,10 @@ export function get_calendar() {
   return axios
     .get('https://xk8r88ywm0.execute-api.eu-west-1.amazonaws.com/botox_function', {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        // 'Access-Control-Allow-Origin': true,
+        // 'Origin': 'http://localhost:3000',
+        // 'Accept': 'application/json'
       }
     })
     .then(res => res.data)
