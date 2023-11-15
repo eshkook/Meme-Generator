@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
-import { signup_post, signup_second_stage_post } from "../api/posts.js";
+import { signup_cognito_post, signup_dynamodb_post } from "../api/posts.js";
 import { useNavigate } from "react-router-dom"
 
 import { useEffect } from "react";
@@ -16,7 +16,7 @@ export default function SignUp_Cognito() {
     const navigate = useNavigate()
 
     const signupMutation = useMutation({
-        mutationFn: signup_post,
+        mutationFn: signup_cognito_post,
         onSuccess: data => {
             signupSecondStageMutation.mutate({
                 user_id: data.user_id,
@@ -31,7 +31,7 @@ export default function SignUp_Cognito() {
     });
 
     const signupSecondStageMutation = useMutation({
-        mutationFn: signup_second_stage_post,
+        mutationFn: signup_dynamodb_post,
         onSuccess: data => {
             navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
         },
