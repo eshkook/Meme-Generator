@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
-import { signup_post } from "../api/posts.js";
+import { signup_post, signup_second_stage_post } from "../api/posts.js";
 import { useNavigate } from "react-router-dom"
 
 import { useEffect } from "react";
@@ -91,23 +91,23 @@ export default function SignUp_Cognito() {
             </Typography>
             <br />
 
-            {/* {errorMessage && (
-        <>
-          <Typography color="error">
-            {errorMessage}
-          </Typography>
-          <br />
-        </>
-      )} */}
+            {errorMessage && (
+                <>
+                    <Typography variant="body2" color="error">
+                        {errorMessage}
+                    </Typography>
+                    <br />
+                </>
+            )}
 
-            {(errorMessage && errorMessage.error == 'Invalid credentials') && (  // Conditionally render the error message
+            {/* {(errorMessage && errorMessage.error == 'Invalid credentials') && (  
                 <>
                     <Typography variant="body2" color="error">
                         Email is already taken
                     </Typography>
                     <br />
                 </>
-            )}
+            )} */}
 
             <form onSubmit={handleSubmit} noValidate autoComplete='off'>
                 {/* noValidate makes the browser not use its built-in validation messages as we want to do it ourselves, 
