@@ -12,8 +12,11 @@ import ZebraRoutes from "./components_router_dom/ZebraRoutes.js"
 import Authentication from "./components_authentication/Authentication.js"
 import Authentication_Cognito from "./components_authentication/Authentication_Cognito.js"
 import Login from "./components_authentication/Login.js"
+import Login_Cognito from "./components_authentication/Login_Cognito.js"
 import SignUp from "./components_authentication/SignUp.js"
+import SignUp_Cognito from "./components_authentication/SignUp_Cognito.js"
 import You_are_logged from "./components_authentication/You_are_logged.js"
+import You_are_logged_Cognito from "./components_authentication/You_are_logged_Cognito.js"
 import "./styles/index.css"; // relevant for the NavLinks in this code
 
 export default function App() {
