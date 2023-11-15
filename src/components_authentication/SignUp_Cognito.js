@@ -18,7 +18,22 @@ export default function SignUp_Cognito() {
     const signupMutation = useMutation({
         mutationFn: signup_post,
         onSuccess: data => {
-            navigate("/youarelogged_cognito", { state: { user_id: data.user_id } });
+            signupSecondStageMutation.mutate({
+                user_id: data.user_id,
+                hobbies: formState.hobbies,
+                age: formState.age
+            });
+        },
+        onError: error => {
+            setErrorMessage(error);
+            console.log(error)
+        }
+    });
+
+    const signupSecondStageMutation = useMutation({
+        mutationFn: signup_second_stage_post,
+        onSuccess: data => {
+            navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
         },
         onError: error => {
             setErrorMessage(error);
@@ -65,8 +80,6 @@ export default function SignUp_Cognito() {
             signupMutation.mutate({
                 email: formState.email,
                 password: formState.password,
-                hobbies: formState.hobbies,
-                age: formState.age
             });
         }
     }
