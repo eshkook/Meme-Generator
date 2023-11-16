@@ -14,12 +14,16 @@ export default function SignUp_Cognito() {
 
     const signupCognitoMutation = useMutation({
         mutationFn: signup_cognito_post,
+        // onSuccess: data => {
+        //     navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
+        // },
         onSuccess: data => {
-            navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
+            console.log(data.statusCode) //, { state: { user_id: data.user_id } });
+            console.log(data.body)
         },
         onError: error => {
-            setErrorMessage(error);
-            console.log(error)
+            setErrorMessage(error.message || "An error occurred");
+            console.log(error.message || "An error occurred")
         }
     });
 
