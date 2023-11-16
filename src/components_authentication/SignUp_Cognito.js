@@ -3,11 +3,8 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
-import { signup_cognito_post, signup_dynamodb_post } from "../api/posts.js";
+import { signup_cognito_post } from "../api/posts.js";
 import { useNavigate } from "react-router-dom"
-
-import { useEffect } from "react";
-import axios from 'axios';
 
 export default function SignUp_Cognito() {
 
@@ -15,23 +12,8 @@ export default function SignUp_Cognito() {
 
     const navigate = useNavigate()
 
-    const signupMutation = useMutation({
+    const signupCognitoMutation = useMutation({
         mutationFn: signup_cognito_post,
-        onSuccess: data => {
-            signupSecondStageMutation.mutate({
-                user_id: data.user_id,
-                hobbies: formState.hobbies,
-                age: formState.age
-            });
-        },
-        onError: error => {
-            setErrorMessage(error);
-            console.log(error)
-        }
-    });
-
-    const signupSecondStageMutation = useMutation({
-        mutationFn: signup_dynamodb_post,
         onSuccess: data => {
             navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
         },
@@ -64,12 +46,52 @@ export default function SignUp_Cognito() {
         }))
     }
 
+    // # Password minimum length
+    // # 8 character(s)
+    // # Password requirements
+    // # Contains at least 1 number
+    // # Contains at least 1 special character
+    // # Contains at least 1 uppercase letter
+    // # Contains at least 1 lowercase letter
+    // # Temporary passwords set by administrators expire in
+    // # 7 day(s)
+
+    function isValidPassword(password) {
+        const minLength = 8;
+        const hasNumber = /[0-9]/;
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+        const hasUpperCase = /[A-Z]/;
+        const hasLowerCase = /[a-z]/;
+    
+        if (password.length < minLength) {
+            return false;
+        }
+        if (!hasNumber.test(password)) {
+            return false;
+        }
+        if (!hasSpecialChar.test(password)) {
+            return false;
+        }
+        if (!hasUpperCase.test(password)) {
+            return false;
+        }
+        if (!hasLowerCase.test(password)) {
+            return false;
+        }
+        return true;
+    }
+
+    function isValidEmail(email) {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email);
+    }
+
     function handleSubmit(event) {
         event.preventDefault() // preventing re-rendering the page
         const temp_object = {
-            email: (formState.email == ''),
-            password: (formState.password == ''),
-            password_confirmation: (formState.password_confirmation != formState.password || formState.password_confirmation == ''),
+            email: !isValidEmail(formState.email),
+            password: !isValidPassword(formState.password),
+            password_confirmation: (formState.password_confirmation != formState.password || !isValidPassword(formState.password_confirmation)),
             age: (isNaN(formState.age) || formState.age < 0 || formState.age > 120)
         }
         setFieldError(temp_object)
@@ -77,9 +99,11 @@ export default function SignUp_Cognito() {
         if (!(temp_object.email || temp_object.password || temp_object.password_confirmation || temp_object.age)) {
             console.log(formState)
 
-            signupMutation.mutate({
+            signupCognitoMutation.mutate({
                 email: formState.email,
                 password: formState.password,
+                hobbies: formState.hobbies,
+                age: formState.age,
             });
         }
     }
@@ -166,8 +190,8 @@ export default function SignUp_Cognito() {
                     <Button
                         variant="contained"
                         type='submit'
-                        disabled={signupMutation.isLoading}>
-                        {signupMutation.isLoading ? "Loading..." : "Submit"}
+                        disabled={signupCognitoMutation.isLoading}>
+                        {signupCognitoMutation.isLoading ? "Loading..." : "Submit"}
                     </Button>
                 </div>
             </form>

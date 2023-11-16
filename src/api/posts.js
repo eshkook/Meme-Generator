@@ -1,6 +1,23 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+export function signup_cognito_post({ username, password, hobbies, age }) {
+  return axios
+    .post("??????????????????????????", {
+      username,
+      password,
+      hobbies,
+      age
+    }, {
+      headers: { '???????????': '?????????????' } 
+    })
+    .then(res => res.data)
+    .catch(error => {
+      // Propagate the error to react-query
+      throw error.response ? error.response.data : new Error('Network error');
+    });
+}
+
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
