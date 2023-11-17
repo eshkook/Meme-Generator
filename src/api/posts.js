@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 export function signup_cognito_post({ username, password, hobbies, age }) {
   return axios
     .post("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
-      username,
+      email,
       password,
       hobbies,
       age
