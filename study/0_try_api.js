@@ -44,5 +44,21 @@
 //         // Save to a file (for Node.js)
 //         fs.writeFileSync('data.json', jsonString, 'utf8');
 //       })
-a={w:1}
-console.log(null.ww==9)
+// a={w:1}
+// console.log(null.ww==9)
+
+const url = 'https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function'; // Replace with your API Gateway URL
+
+fetch(url, {
+    method: 'POST', // or 'GET', depending on your Lambda function's configuration
+    // headers: {
+    //     'Content-Type': 'application/json',
+    //     // Add any other headers your API requires
+    // },
+    // body: JSON.stringify({
+    //     // Your request body content, if needed for POST requests
+    // }),
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));

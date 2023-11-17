@@ -13,7 +13,8 @@ export default function SignUp_Cognito() {
     const navigate = useNavigate()
 
     const signupCognitoMutation = useMutation({
-        mutationFn: signup_cognito_post,
+        // mutationFn: signup_cognito_post,
+        mutationFn: form => signup_cognito_post(form),
         // onSuccess: data => {
         //     navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
         // },
@@ -24,6 +25,7 @@ export default function SignUp_Cognito() {
         onError: error => {
             setErrorMessage(error.message || "An error occurred");
             console.log(error.message || "An error occurred")
+            console.dir(error);
         }
     });
 
@@ -66,7 +68,7 @@ export default function SignUp_Cognito() {
         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
         const hasUpperCase = /[A-Z]/;
         const hasLowerCase = /[a-z]/;
-    
+
         if (password.length < minLength) {
             return false;
         }
@@ -101,6 +103,7 @@ export default function SignUp_Cognito() {
         setFieldError(temp_object)
 
         if (!(temp_object.email || temp_object.password || temp_object.password_confirmation || temp_object.age)) {
+
             console.log(formState)
 
             signupCognitoMutation.mutate({
@@ -109,6 +112,8 @@ export default function SignUp_Cognito() {
                 hobbies: formState.hobbies,
                 age: formState.age,
             });
+        } else {
+            setErrorMessage("Fields in red are invalid")
         }
     }
 
