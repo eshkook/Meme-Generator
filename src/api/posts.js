@@ -1,23 +1,55 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-export function signup_cognito_post({ username, password, hobbies, age }) {
-  return axios
-    .post("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
-      email,
-      password,
-      hobbies,
-      age
-     }, //{
-    //   headers: { '???????????': '?????????????' } 
-    // }
-    )
-    .then(res => res.data)
-    .catch(error => {
-      // Propagate the error to react-query
-      throw error.response ? error.response.data : new Error('Network error');
-    });
+export function signup_cognito_post({ email, password, hobbies, age }) {
+  console.log('signup_cognito_post called with:', { email, password, hobbies, age });
+
+  return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
+      method: 'POST',
+      // headers: {
+      //     'Content-Type': 'application/json',
+      // },
+      body: JSON.stringify({
+          email,
+          password,
+          hobbies,
+          age
+      })
+  })
+  .then(response => {
+      if (!response.ok) {
+          // If the response is not 2xx, this will be executed
+          throw new Error('Network response was not ok');
+      }
+      return response.json();
+  })
+  .then(data => {
+      // This is your JSON data
+      return data;
+  })
+  .catch(error => {
+      // Handle the error
+      throw new Error(error.message);
+  });
 }
+
+// export function signup_cognito_post({ username, password, hobbies, age }) {
+//   return axios
+//     .post("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
+//       email,
+//       password,
+//       hobbies,
+//       age
+//      }, //{
+//     //   headers: { '???????????': '?????????????' } 
+//     // }
+//     )
+//     .then(res => res.data)
+//     .catch(error => {
+//       // Propagate the error to react-query
+//       throw error.response ? error.response.data : new Error('Network error');
+//     });
+// }
 
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = 'csrftoken';

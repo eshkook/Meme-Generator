@@ -13,14 +13,10 @@ export default function SignUp_Cognito() {
     const navigate = useNavigate()
 
     const signupCognitoMutation = useMutation({
-        // mutationFn: signup_cognito_post,
-        mutationFn: form => signup_cognito_post(form),
-        // onSuccess: data => {
-        //     navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
-        // },
+        mutationFn: signup_cognito_post,
         onSuccess: data => {
-            console.log(data.statusCode) //, { state: { user_id: data.user_id } });
-            console.log(data.body)
+            console.log('Response data:', data);
+            // navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
         },
         onError: error => {
             setErrorMessage(error.message || "An error occurred");
