@@ -160,6 +160,10 @@ export default function SignUp_Cognito() {
                     />
                     <TextField
                         onChange={updateFormState}
+                        onPaste={(event) => {
+                            event.preventDefault();
+                            setErrorMessage("Password confirmation cell requires manual typing")
+                        }}
                         id="outlined-basic"
                         label="Password Confirmation"
                         variant="outlined"
