@@ -9,7 +9,6 @@ import { useNavigate, useLocation } from "react-router-dom"
 export default function Confirmation_Cognito() {
 
     const location = useLocation()
-    console.log(location)
 
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -68,7 +67,7 @@ export default function Confirmation_Cognito() {
     return (
         <>
             <Typography variant="subtitle1" component="h1">
-                Please confirm the email {formState.email}:
+                A confirmation code was sent to {formState.email}. <br />
             </Typography>
             <br />
 

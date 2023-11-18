@@ -97,7 +97,7 @@ export default function SignUp_Cognito() {
     function handleSubmit(event) {
         event.preventDefault() // preventing re-rendering the page
         const temp_object = {
-            email: !isValidEmail(formState.email),
+            email: false, //!isValidEmail(formState.email),
             password: !isValidPassword(formState.password),
             password_confirmation: (formState.password_confirmation != formState.password || !isValidPassword(formState.password_confirmation)),
             age: (isNaN(formState.age) || formState.age < 0 || formState.age > 120)
@@ -132,15 +132,6 @@ export default function SignUp_Cognito() {
                     <br />
                 </>
             )}
-
-            {/* {(errorMessage && errorMessage.error == 'Invalid credentials') && (
-                <>
-                    <Typography variant="body2" color="error">
-                        Email is already taken
-                    </Typography>
-                    <br />
-                </>
-            )} */}
 
             <form onSubmit={handleSubmit} noValidate autoComplete='off'>
                 {/* noValidate makes the browser not use its built-in validation messages as we want to do it ourselves,
