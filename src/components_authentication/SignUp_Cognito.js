@@ -92,12 +92,12 @@ export default function SignUp_Cognito() {
     function isValidEmail(email) {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
-    }
+    }    
 
     function handleSubmit(event) {
         event.preventDefault() // preventing re-rendering the page
         const temp_object = {
-            email: false, //!isValidEmail(formState.email),
+            email: !isValidEmail(formState.email),
             password: !isValidPassword(formState.password),
             password_confirmation: (formState.password_confirmation != formState.password || !isValidPassword(formState.password_confirmation)),
             age: (isNaN(formState.age) || formState.age < 0 || formState.age > 120)
