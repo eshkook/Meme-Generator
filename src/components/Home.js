@@ -7,6 +7,7 @@ import Authentication from "../components_authentication/Authentication.js"
 import Authentication_Cognito from "../components_authentication/Authentication_Cognito.js"
 import Header from "./Header.js"
 import Meme from "./Meme.js"
+import Audio from "./Audio.js"
 import Meme_2 from "./Meme_2.js"
 import Meme_3 from "./Meme_3.js"
 import Meme_4 from "./Meme_4.js"
@@ -69,6 +70,10 @@ export default function Home() {
       <br />
       <button onClick={() => setCurrentPage(<Lambda />)}>
         Lambda
+      </button>
+      <br />
+      <button onClick={() => setCurrentPage(<Audio />)}>
+        Audio
       </button>
       <br />
       {currentPage}
