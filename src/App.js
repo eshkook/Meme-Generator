@@ -15,6 +15,7 @@ import Login from "./components_authentication/Login.js"
 import Login_Cognito from "./components_authentication/Login_Cognito.js"
 import SignUp from "./components_authentication/SignUp.js"
 import SignUp_Cognito from "./components_authentication/SignUp_Cognito.js"
+import Confirmation_Cognito from "./components_authentication/Confirmation_Cognito.js"
 import You_are_logged from "./components_authentication/You_are_logged.js"
 import You_are_logged_Cognito from "./components_authentication/You_are_logged_Cognito.js"
 import "./styles/index.css"; // relevant for the NavLinks in this code
@@ -85,6 +86,7 @@ export default function App() {
           <Route path="/authentication_cognito" element={<Authentication_Cognito />} />
           <Route path="/login_cognito" element={<Login_Cognito />} />
           <Route path="/signup_cognito" element={<SignUp_Cognito />} />
+          <Route path="/confirmation_cognito" element={<Confirmation_Cognito />} />
           <Route path="/youarelogged_cognito" element={<You_are_logged_Cognito />} />
 
           <Route path="*" element={<NotFound />} /> {/* any sub-route that is not one of the above will fall here */}

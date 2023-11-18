@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-export function signup_cognito_post({ email, password, hobbies, age }) {
-  console.log('signup_cognito_post called with:', { email, password, hobbies, age });
+export function signup_cognito_post({ email, password }) {
+  console.log('signup_cognito_post called with:', { email, password });
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
       method: 'POST',
@@ -10,10 +10,9 @@ export function signup_cognito_post({ email, password, hobbies, age }) {
       //     'Content-Type': 'application/json',
       // },
       body: JSON.stringify({
-          email,
-          password,
-          hobbies,
-          age
+        action: 'signup',  
+        email,
+        password,
       })
   })
   .then(response => {
@@ -32,6 +31,40 @@ export function signup_cognito_post({ email, password, hobbies, age }) {
       throw new Error(error.message);
   });
 }
+
+export function confirmation_post({ email, confirmationCode }) {
+  console.log('confirmation_post called with:', { email, confirmationCode });
+
+  return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          action: 'confirm',
+          email: email,
+          confirmationCode: confirmationCode
+      })
+  })
+  .then(response => {
+      if (!response.ok) {
+          // If the response is not 2xx, this will be executed
+          throw new Error('Network response was not ok');
+      }
+      return response.json();
+  })
+  .then(data => {
+      // This is your JSON data
+      console.log('Confirmation response:', data);
+      return data;
+  })
+  .catch(error => {
+      // Handle the error
+      console.error('Error during confirmation:', error);
+      throw new Error(error.message);
+  });
+}
+
 
 // export function signup_cognito_post({ username, password, hobbies, age }) {
 //   return axios
