@@ -8,6 +8,8 @@ import Authentication_Cognito from "../components_authentication/Authentication_
 import Header from "./Header.js"
 import Meme from "./Meme.js"
 import Audio from "./Audio.js"
+import Landing_Page from "./Landing_Page.js"
+import Real_Estate from "./Real_Estate.js"
 import Meme_2 from "./Meme_2.js"
 import Meme_3 from "./Meme_3.js"
 import Meme_4 from "./Meme_4.js"
@@ -76,6 +78,12 @@ export default function Home() {
         Audio
       </button>
       <br />
+      <button onClick={() => setCurrentPage(<Landing_Page />)}>
+        Landing page
+      </button>
+      <button onClick={() => setCurrentPage(<Real_Estate />)}>
+        Real estate
+      </button>
       {currentPage}
     </div>
   )
