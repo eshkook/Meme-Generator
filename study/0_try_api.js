@@ -82,29 +82,30 @@
 //         throw error.response ? error.response.data : new Error('Network error');
 //     });
 
-const axios = require('axios');
+// const axios = require('axios');
 
-axios
-    .post("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
-        email: 1,
-        password: 1,
-        hobbies: 1,
-        age: 1
-    })
-    .then(res => console.log(res.data))
-    .catch(error => {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            console.error("Error response:", error.response.data);
-            console.error("Error status:", error.response.status);
-            console.error("Error headers:", error.response.headers);
-        } else if (error.request) {
-            // The request was made but no response was received
-            console.error("Error request:", error.request);
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            console.error('Error', error.message);
-        }
-        console.error("Error config:", error.config);
-    });
+// axios
+//     .post("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
+//         email: 1,
+//         password: 1,
+//         hobbies: 1,
+//         age: 1
+//     })
+//     .then(res => console.log(res.data))
+//     .catch(error => {
+//         if (error.response) {
+//             // The request was made and the server responded with a status code
+//             // that falls out of the range of 2xx
+//             console.error("Error response:", error.response.data);
+//             console.error("Error status:", error.response.status);
+//             console.error("Error headers:", error.response.headers);
+//         } else if (error.request) {
+//             // The request was made but no response was received
+//             console.error("Error request:", error.request);
+//         } else {
+//             // Something happened in setting up the request that triggered an Error
+//             console.error('Error', error.message);
+//         }
+//         console.error("Error config:", error.config);
+//     });
+console.log(isNaN('t'))
