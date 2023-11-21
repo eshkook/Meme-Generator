@@ -180,6 +180,7 @@ export default function SignUp_Cognito() {
                         label="Password"
                         variant="outlined"
                         name="password"
+                        type={showPassword ? 'text' : 'password'}
                         value={formState.password}
                         error={fieldErrorState.password}
                         required  // make a '*' to indicate it is a mandatory field
@@ -207,6 +208,7 @@ export default function SignUp_Cognito() {
                         label="Password Confirmation"
                         variant="outlined"
                         name="password_confirmation"
+                        type={showPasswordConfirmation ? 'text' : 'password'}
                         value={formState.password_confirmation}
                         error={fieldErrorState.password_confirmation}
                         required  // make a '*' to indicate it is a mandatory field
@@ -218,7 +220,7 @@ export default function SignUp_Cognito() {
                                         onMouseDown={handleMouseDownPasswordConfirmation}
                                         edge="end"
                                     >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        {showPasswordConfirmation ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
                             ),
