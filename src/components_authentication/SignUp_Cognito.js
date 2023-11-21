@@ -6,7 +6,29 @@ import { useState } from "react"
 import { signup_cognito_post } from "../api/posts.js";
 import { useNavigate } from "react-router-dom"
 
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+
 export default function SignUp_Cognito() {
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
+
+    const handleClickShowPassword = () => {
+        setShowPassword(showPassword => (!showPassword));
+    };
+    const handleClickShowPasswordConfirmation = () => {
+        setShowPasswordConfirmation(showPasswordConfirmation => (!showPasswordConfirmation));
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+    const handleMouseDownPasswordConfirmation = (event) => {
+        event.preventDefault();
+    };
 
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -140,7 +162,7 @@ export default function SignUp_Cognito() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <TextField
                         onChange={updateFormState} // same as writing onChange={()=>updateFormState(event)}
-                        id="outlined-basic"
+                        id="email-input"
                         label="Email"
                         variant="outlined"
                         name="email"
@@ -154,13 +176,26 @@ export default function SignUp_Cognito() {
                             event.preventDefault();
                             setErrorMessage("Password requires manual typing")
                         }}
-                        id="outlined-basic"
+                        id="password-input"
                         label="Password"
                         variant="outlined"
                         name="password"
                         value={formState.password}
                         error={fieldErrorState.password}
                         required  // make a '*' to indicate it is a mandatory field
+                        InputProps={{ // <-- This is the part that adds the toggle button
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <TextField
                         onChange={updateFormState}
@@ -168,17 +203,30 @@ export default function SignUp_Cognito() {
                             event.preventDefault();
                             setErrorMessage("Password requires manual typing")
                         }}
-                        id="outlined-basic"
+                        id="password-confirmation-input"
                         label="Password Confirmation"
                         variant="outlined"
                         name="password_confirmation"
                         value={formState.password_confirmation}
                         error={fieldErrorState.password_confirmation}
                         required  // make a '*' to indicate it is a mandatory field
+                        InputProps={{ // <-- This is the part that adds the toggle button
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPasswordConfirmation}
+                                        onMouseDown={handleMouseDownPasswordConfirmation}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <TextField
                         onChange={updateFormState}
-                        id="outlined-basic"
+                        id="hobbies-input"
                         label="Hobbies"
                         variant="outlined"
                         name="hobbies"
@@ -186,7 +234,7 @@ export default function SignUp_Cognito() {
                     />
                     <TextField
                         onChange={updateFormState}
-                        id="outlined-basic"
+                        id="age-input"
                         label="Age"
                         type="number"
                         InputProps={{ inputProps: { min: 0, max: 120 } }}

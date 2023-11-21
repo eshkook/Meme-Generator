@@ -6,10 +6,22 @@ import { useState } from "react"
 import { login_post } from "../api/posts.js";
 import { useNavigate } from "react-router-dom"
 
-import { useEffect } from "react";
-import axios from 'axios';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
 
 export default function Login_Cognito() {
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => {
+        setShowPassword(showPassword => (!showPassword));
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate()
@@ -81,7 +93,7 @@ export default function Login_Cognito() {
     function isValidEmail(email) {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
-    } 
+    }
 
     function handleSubmit(event) {
         event.preventDefault() // preventing re-rendering the page
@@ -126,7 +138,7 @@ export default function Login_Cognito() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <TextField
                         onChange={updateFormState} // same as writing onChange={()=>updateFormState(event)}
-                        id="outlined-basic"
+                        id="email-input"
                         label="User Email"
                         variant="outlined"
                         name="email"
@@ -136,17 +148,30 @@ export default function Login_Cognito() {
                     />
                     <TextField
                         onChange={updateFormState}
-                        onPaste={(event) => {
-                            event.preventDefault();
-                            setErrorMessage("Password requires manual typing")
-                        }}
-                        id="outlined-basic"
+                        // onPaste={(event) => {
+                        //     event.preventDefault();
+                        //     setErrorMessage("Password requires manual typing")
+                        // }}
+                        id="password-input"
                         label="Password"
+                        type={showPassword ? 'text' : 'password'}
                         variant="outlined"
                         name="password"
                         value={formState.password}
                         error={fieldErrorState.password}
-                    // required  // make a '*' to indicate it is a mandatory field
+                        InputProps={{ // <-- This is the part that adds the toggle button
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <Button
                         variant="contained"
