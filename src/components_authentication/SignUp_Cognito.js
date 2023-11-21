@@ -40,9 +40,7 @@ export default function SignUp_Cognito() {
             console.log('Response data:', data);
             navigate("/confirmation_cognito", {
                 state: {
-                    email: formState.email,
-                    hobbies: formState.hobbies,
-                    age: formState.age
+                    email: formState.email
                 }
             });
         },
@@ -57,15 +55,12 @@ export default function SignUp_Cognito() {
         email: '',
         password: '',
         password_confirmation: '',
-        hobbies: '',
-        age: ''
     })
 
     const [fieldErrorState, setFieldError] = useState({
         email: false,
         password: false,
         password_confirmation: false,
-        age: false
     })
 
     function updateFormState(event) {
@@ -122,11 +117,11 @@ export default function SignUp_Cognito() {
             email: !isValidEmail(formState.email),
             password: !isValidPassword(formState.password),
             password_confirmation: (formState.password_confirmation != formState.password || !isValidPassword(formState.password_confirmation)),
-            age: (isNaN(formState.age) || formState.age < 0 || formState.age > 120)
+            // age: (isNaN(formState.age) || formState.age < 0 || formState.age > 120)
         }
         setFieldError(temp_object)
 
-        if (!(temp_object.email || temp_object.password || temp_object.password_confirmation || temp_object.age)) {
+        if (!(temp_object.email || temp_object.password)) {
 
             console.log(formState)
 
@@ -226,7 +221,7 @@ export default function SignUp_Cognito() {
                             ),
                         }}
                     />
-                    <TextField
+                    {/* <TextField
                         onChange={updateFormState}
                         id="hobbies-input"
                         label="Hobbies"
@@ -244,7 +239,7 @@ export default function SignUp_Cognito() {
                         name="age"
                         value={formState.age}
                         error={fieldErrorState.age}
-                    />
+                    /> */}
                     <Button
                         variant="contained"
                         type='submit'
