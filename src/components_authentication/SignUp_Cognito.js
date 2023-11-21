@@ -192,7 +192,7 @@ export default function SignUp_Cognito() {
                                         onMouseDown={handleMouseDownPassword}
                                         edge="end"
                                     >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
                                 </InputAdornment>
                             ),
@@ -220,7 +220,7 @@ export default function SignUp_Cognito() {
                                         onMouseDown={handleMouseDownPasswordConfirmation}
                                         edge="end"
                                     >
-                                        {showPasswordConfirmation ? <VisibilityOff /> : <Visibility />}
+                                        {showPasswordConfirmation ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
                                 </InputAdornment>
                             ),
