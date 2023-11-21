@@ -17,7 +17,7 @@ export default function Login_Cognito() {
     const loginMutation = useMutation({
         mutationFn: login_post,
         onSuccess: data => {
-            navigate("/youarelogged_cognito", { state: { username: data.username } });
+            navigate("/youarelogged_cognito", { state: { email: data.email } });
         },
         onError: error => {
             setErrorMessage(error);
@@ -26,12 +26,12 @@ export default function Login_Cognito() {
     });
 
     const [formState, setFormState] = useState({
-        username: '',
+        email: '',
         password: '',
     })
 
     const [fieldErrorState, setFieldError] = useState({
-        username: false,
+        email: false,
         password: false,
     })
 
@@ -43,21 +43,63 @@ export default function Login_Cognito() {
         }))
     }
 
+    // # Password minimum length
+    // # 8 character(s)
+    // # Password requirements
+    // # Contains at least 1 number
+    // # Contains at least 1 special character
+    // # Contains at least 1 uppercase letter
+    // # Contains at least 1 lowercase letter
+    // # Temporary passwords set by administrators expire in
+    // # 7 day(s)
+
+    function isValidPassword(password) {
+        const minLength = 8;
+        const hasNumber = /[0-9]/;
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+        const hasUpperCase = /[A-Z]/;
+        const hasLowerCase = /[a-z]/;
+
+        if (password.length < minLength) {
+            return false;
+        }
+        if (!hasNumber.test(password)) {
+            return false;
+        }
+        if (!hasSpecialChar.test(password)) {
+            return false;
+        }
+        if (!hasUpperCase.test(password)) {
+            return false;
+        }
+        if (!hasLowerCase.test(password)) {
+            return false;
+        }
+        return true;
+    }
+
+    function isValidEmail(email) {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email);
+    } 
+
     function handleSubmit(event) {
         event.preventDefault() // preventing re-rendering the page
         const temp_object = {
-            username: (formState.username == ''),
-            password: (formState.password == ''),
+            email: !isValidEmail(formState.email),
+            password: !isValidPassword(formState.password),
         }
         setFieldError(temp_object)
 
-        if (!(temp_object.username || temp_object.password)) {
+        if (!(temp_object.email || temp_object.password)) {
             console.log(formState)
 
             loginMutation.mutate({
-                username: formState.username,
+                email: formState.email,
                 password: formState.password,
             });
+        } else {
+            setErrorMessage("Fields in red are invalid")
         }
     }
 
@@ -68,10 +110,10 @@ export default function Login_Cognito() {
             </Typography>
             <br />
 
-            {(errorMessage && errorMessage.error == 'Invalid credentials') && (  // Conditionally render the error message
+            {errorMessage && (
                 <>
                     <Typography variant="body2" color="error">
-                        Invalid credentials
+                        {errorMessage}
                     </Typography>
                     <br />
                 </>
@@ -85,15 +127,19 @@ export default function Login_Cognito() {
                     <TextField
                         onChange={updateFormState} // same as writing onChange={()=>updateFormState(event)}
                         id="outlined-basic"
-                        label="Username"
+                        label="User Email"
                         variant="outlined"
-                        name="username"
-                        value={formState.username}
-                        error={fieldErrorState.username}
+                        name="email"
+                        value={formState.email}
+                        error={fieldErrorState.email}
                     // required  // make a '*' to indicate it is a mandatory field
                     />
                     <TextField
                         onChange={updateFormState}
+                        onPaste={(event) => {
+                            event.preventDefault();
+                            setErrorMessage("Password requires manual typing")
+                        }}
                         id="outlined-basic"
                         label="Password"
                         variant="outlined"
