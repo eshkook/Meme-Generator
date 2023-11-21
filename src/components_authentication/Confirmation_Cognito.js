@@ -18,7 +18,7 @@ export default function Confirmation_Cognito() {
         mutationFn: confirmation_post,
         onSuccess: data => {
             console.log('Response data:', data);
-            navigate("/youarelogged_cognito") //, { state: { user_id: data.user_id } });
+            navigate("/login_cognito") //, { state: { user_id: data.user_id } });
         },
         onError: error => {
             setErrorMessage(error.message || "An error occurred");
