@@ -32,8 +32,8 @@ export function signup_cognito_post({ email, password }) {
   });
 }
 
-export function confirmation_post({ email, confirmationCode }) {
-  console.log('confirmation_post called with:', { email, confirmationCode });
+export function confirmation_post({ email, confirmation_code }) {
+  console.log('confirmation_post called with:', { email, confirmation_code });
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
       method: 'POST',
@@ -43,7 +43,7 @@ export function confirmation_post({ email, confirmationCode }) {
       body: JSON.stringify({
           action: 'confirm',
           email: email,
-          confirmationCode: confirmationCode
+          confirmation_code: confirmation_code
       })
   })
   .then(response => {

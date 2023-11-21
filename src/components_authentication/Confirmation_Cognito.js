@@ -67,7 +67,7 @@ export default function Confirmation_Cognito() {
     return (
         <>
             <Typography variant="subtitle1" component="h1">
-                A confirmation code was sent to {formState.email}. <br />
+                A confirmation code was sent to {formState.email}. 
             </Typography>
             <br />
 
