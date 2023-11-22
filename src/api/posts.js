@@ -65,14 +65,11 @@ export function confirmation_post({ email, confirmation_code }) {
   });
 }
 
-function login_post(email, password) {
+function login_cognito_post(email, password) {
   console.log('login_cognito_post called with:', { email, password });
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
       method: 'POST',
-      // headers: {
-      //     'Content-Type': 'application/json',
-      // },
       body: JSON.stringify({
           action: 'login',  
           email,

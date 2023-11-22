@@ -26,7 +26,7 @@ export default function Login_Cognito() {
     const navigate = useNavigate()
 
     const loginMutation = useMutation({
-        mutationFn: login_post,
+        mutationFn: login_cognito_post,
         onSuccess: data => {
             navigate("/youarelogged_cognito") //, { state: { } });
         },
