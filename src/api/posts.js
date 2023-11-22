@@ -65,6 +65,36 @@ export function confirmation_post({ email, confirmation_code }) {
   });
 }
 
+function login_post(email, password) {
+  console.log('login_cognito_post called with:', { email, password });
+
+  return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
+      method: 'POST',
+      // headers: {
+      //     'Content-Type': 'application/json',
+      // },
+      body: JSON.stringify({
+          action: 'login',  
+          email,
+          password,
+      })
+  })
+  .then(response => {
+      if (!response.ok) {
+          // If the response is not 2xx, this will be executed
+          throw new Error('Network response was not ok');
+      }
+      return response.json();
+  })
+  .then(data => {
+      // This is your JSON data
+      return data;
+  })
+  .catch(error => {
+      // Handle the error
+      throw new Error(error.message);
+  });
+}
 
 // export function signup_cognito_post({ username, password, hobbies, age }) {
 //   return axios

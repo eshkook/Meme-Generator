@@ -28,10 +28,7 @@ export default function Login_Cognito() {
     const loginMutation = useMutation({
         mutationFn: login_post,
         onSuccess: data => {
-            navigate("/youarelogged_cognito", { state: { id_token: data.id_token,
-                                                         access_token: data.access_token,
-                                                         refresh_token: data.refresh_token
-        } });
+            navigate("/youarelogged_cognito") //, { state: { } });
         },
         onError: error => {
             setErrorMessage(error);
