@@ -23,7 +23,6 @@ export default function Confirmation_Cognito() {
         onError: error => {
             setErrorMessage(error.message || "An error occurred");
             console.log(error.message || "An error occurred")
-            console.dir(error);
         }
     });
 

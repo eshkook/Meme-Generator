@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export function signup_cognito_post({ email, password }) {
-  console.log('signup_cognito_post called with:', { email, password });
+  // console.log('signup_cognito_post called with:', { email, password });
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
       method: 'POST',
@@ -11,8 +11,8 @@ export function signup_cognito_post({ email, password }) {
       // },
       body: JSON.stringify({
         action: 'signup',  
-        email,
-        password,
+        email: email,
+        password: password,
       })
   })
   .then(response => {
@@ -33,7 +33,7 @@ export function signup_cognito_post({ email, password }) {
 }
 
 export function confirmation_post({ email, confirmation_code }) {
-  console.log('confirmation_post called with:', { email, confirmation_code });
+  // console.log('confirmation_post called with:', { email, confirmation_code });
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
       method: 'POST',
@@ -55,25 +55,25 @@ export function confirmation_post({ email, confirmation_code }) {
   })
   .then(data => {
       // This is your JSON data
-      console.log('Confirmation response:', data);
+      // console.log('Confirmation response:', data);
       return data;
   })
   .catch(error => {
       // Handle the error
-      console.error('Error during confirmation:', error);
+      // console.error('Error during confirmation:', error);
       throw new Error(error.message);
   });
 }
 
-function login_cognito_post(email, password) {
-  console.log('login_cognito_post called with:', { email, password });
+export function login_cognito_post({ email, password }) {
+  // console.log('login_cognito_post called with:', { email, password });
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
       method: 'POST',
       body: JSON.stringify({
           action: 'login',  
-          email,
-          password,
+          email: email,
+          password: password,
       })
   })
   .then(response => {
