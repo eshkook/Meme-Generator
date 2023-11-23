@@ -29,7 +29,7 @@ export default function Login_Cognito() {
         mutationFn: login_cognito_post,
         onSuccess: data => {
             // navigate("/youarelogged_cognito") //, { state: { } });
-            console.log('success')
+            console.log("success")
         },
         onError: error => {
             setErrorMessage(error.message || "An error occurred");

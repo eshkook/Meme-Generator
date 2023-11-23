@@ -5,91 +5,90 @@ export function signup_cognito_post({ email, password }) {
   // console.log('signup_cognito_post called with:', { email, password });
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
-      method: 'POST',
-      // headers: {
-      //     'Content-Type': 'application/json',
-      // },
-      body: JSON.stringify({
-        action: 'signup',  
-        email: email,
-        password: password,
-      })
+    method: 'POST',
+    // headers: {
+    //     'Content-Type': 'application/json',
+    // },
+    body: JSON.stringify({
+      action: 'signup',
+      email: email,
+      password: password,
+    })
   })
-  .then(response => {
+    .then(response => {
       if (!response.ok) {
-          // If the response is not 2xx, this will be executed
-          throw new Error('Network response was not ok');
+        // If the response is not 2xx, this will be executed
+        throw new Error('Network response was not ok');
       }
       return response.json();
-  })
-  .then(data => {
+    })
+    .then(data => {
       // This is your JSON data
       return data;
-  })
-  .catch(error => {
+    })
+    .catch(error => {
       // Handle the error
       throw new Error(error.message);
-  });
+    });
 }
 
 export function confirmation_post({ email, confirmation_code }) {
   // console.log('confirmation_post called with:', { email, confirmation_code });
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
-      method: 'POST',
-      // headers: {
-      //     'Content-Type': 'application/json',
-      // },
-      body: JSON.stringify({
-          action: 'confirm',
-          email: email,
-          confirmation_code: confirmation_code
-      })
+    method: 'POST',
+    // headers: {
+    //     'Content-Type': 'application/json',
+    // },
+    body: JSON.stringify({
+      action: 'confirm',
+      email: email,
+      confirmation_code: confirmation_code
+    })
   })
-  .then(response => {
+    .then(response => {
       if (!response.ok) {
-          // If the response is not 2xx, this will be executed
-          throw new Error('Network response was not ok');
+        // If the response is not 2xx, this will be executed
+        throw new Error('Network response was not ok');
       }
       return response.json();
-  })
-  .then(data => {
+    })
+    .then(data => {
       // This is your JSON data
       // console.log('Confirmation response:', data);
       return data;
-  })
-  .catch(error => {
+    })
+    .catch(error => {
       // Handle the error
       // console.error('Error during confirmation:', error);
       throw new Error(error.message);
-  });
+    });
 }
 
 export function login_cognito_post({ email, password }) {
-  // console.log('login_cognito_post called with:', { email, password });
-
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
-      method: 'POST',
-      body: JSON.stringify({
-          action: 'login',  
-          email: email,
-          password: password,
-      })
+    method: 'POST',
+    body: JSON.stringify({
+      action: 'login',
+      email: email,
+      password: password,
+    })
   })
   .then(response => {
-      if (!response.ok) {
-          // If the response is not 2xx, this will be executed
-          throw new Error('Network response was not ok');
-      }
-      return response.json();
+    if (!response.ok) {
+      // First, parse the response as JSON
+      return response.json().then(err => {
+        throw new Error((err.message) ? ("Response not ok. " +  err.message) : "Response not ok.");
+      });
+    }
+    return response.json();
   })
   .then(data => {
-      // This is your JSON data
-      return data;
+    // This is your JSON data
+    return data;
   })
   .catch(error => {
-      // Handle the error
-      throw new Error(error.message);
+    return new Error(error.message || "An error occurred during the login process.");
   });
 }
 
