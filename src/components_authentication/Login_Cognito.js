@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button';
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
-import { login_post } from "../api/posts.js";
+import { login_cognito_post } from "../api/posts.js";
 import { useNavigate } from "react-router-dom"
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
