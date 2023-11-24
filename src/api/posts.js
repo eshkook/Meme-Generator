@@ -68,6 +68,7 @@ export function confirmation_post({ email, confirmation_code }) {
 export function login_cognito_post({ email, password }) {
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify({
       action: 'login',
       email: email,
