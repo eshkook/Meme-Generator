@@ -5,6 +5,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
 import { confirmation_post } from "../api/posts.js";
 import { useNavigate, useLocation } from "react-router-dom"
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 export default function Confirmation_Cognito() {
 
@@ -66,7 +68,7 @@ export default function Confirmation_Cognito() {
     return (
         <>
             <Typography variant="subtitle1" component="h1">
-                A confirmation code was sent to {formState.email}. 
+                A confirmation code was sent to {formState.email}.
             </Typography>
             <br />
 
@@ -92,13 +94,14 @@ export default function Confirmation_Cognito() {
                         name="confirmation_code"
                         value={formState.confirmation_code}
                         error={fieldErrorState.confirmation_code}
-                        required  // make a '*' to indicate it is a mandatory field
+                    // required  // make a '*' to indicate it is a mandatory field
                     />
                     <Button
                         variant="contained"
                         type='submit'
                         disabled={confirmationMutation.isLoading}>
-                        {confirmationMutation.isLoading ? "Loading..." : "Submit"}
+                        {confirmationMutation.isLoading ? <CircularProgress size={24} /> : "Submit"}
+                        {/* {confirmationMutation.isLoading ? "Loading..." : "Submit"} */}
                     </Button>
                 </div>
             </form>

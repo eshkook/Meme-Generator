@@ -9,6 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 export default function Login_Cognito() {
 
@@ -177,7 +179,8 @@ export default function Login_Cognito() {
                         variant="contained"
                         type='submit'
                         disabled={loginMutation.isLoading}>
-                        {loginMutation.isLoading ? "Loading..." : "Submit"}
+                        {loginMutation.isLoading ? <CircularProgress size={24} /> : "Submit"}
+                        {/* {loginMutation.isLoading ? "Loading..." : "Submit"} */}
                     </Button>
                 </div>
             </form>

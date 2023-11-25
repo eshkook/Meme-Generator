@@ -10,25 +10,26 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function SignUp_Cognito() {
 
     const [showPassword, setShowPassword] = useState(false);
-    const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
+    // const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
     const handleClickShowPassword = () => {
         setShowPassword(showPassword => (!showPassword));
     };
-    const handleClickShowPasswordConfirmation = () => {
-        setShowPasswordConfirmation(showPasswordConfirmation => (!showPasswordConfirmation));
-    };
+    // const handleClickShowPasswordConfirmation = () => {
+    //     setShowPasswordConfirmation(showPasswordConfirmation => (!showPasswordConfirmation));
+    // };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const handleMouseDownPasswordConfirmation = (event) => {
-        event.preventDefault();
-    };
+    // const handleMouseDownPasswordConfirmation = (event) => {
+    //     event.preventDefault();
+    // };
 
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -108,7 +109,7 @@ export default function SignUp_Cognito() {
     function isValidEmail(email) {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
-    }    
+    }
 
     function handleSubmit(event) {
         event.preventDefault() // preventing re-rendering the page
@@ -202,7 +203,7 @@ export default function SignUp_Cognito() {
                         label="Password Confirmation"
                         variant="outlined"
                         name="password_confirmation"
-                        type={showPasswordConfirmation ? 'text' : 'password'}
+                        type={showPassword ? 'text' : 'password'}
                         value={formState.password_confirmation}
                         error={fieldErrorState.password_confirmation}
                         required  // make a '*' to indicate it is a mandatory field
@@ -210,11 +211,11 @@ export default function SignUp_Cognito() {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton
-                                        onClick={handleClickShowPasswordConfirmation}
-                                        onMouseDown={handleMouseDownPasswordConfirmation}
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
                                         edge="end"
                                     >
-                                        {showPasswordConfirmation ? <Visibility /> : <VisibilityOff />}
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
                                 </InputAdornment>
                             ),
@@ -243,7 +244,8 @@ export default function SignUp_Cognito() {
                         variant="contained"
                         type='submit'
                         disabled={signupCognitoMutation.isLoading}>
-                        {signupCognitoMutation.isLoading ? "Loading..." : "Submit"}
+                        {signupCognitoMutation.isLoading ? <CircularProgress size={24} /> : "Submit"}
+                        {/* {signupCognitoMutation.isLoading ? "Loading..." : "Submit"} */}
                     </Button>
                 </div>
             </form>
