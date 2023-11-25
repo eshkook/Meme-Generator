@@ -108,4 +108,5 @@
 //         }
 //         console.error("Error config:", error.config);
 //     });
-console.log(isNaN('t'))
+a={a:1}
+console.log(null===null)

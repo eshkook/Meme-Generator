@@ -20,7 +20,7 @@ export default function Confirmation_Cognito() {
         mutationFn: confirmation_post,
         onSuccess: data => {
             console.log('Response data:', data);
-            navigate("/login_cognito") //, { state: { user_id: data.user_id } });
+            navigate("/login_cognito", { state: { just_confirmed_email: true } });
         },
         onError: error => {
             setErrorMessage(error.message || "An error occurred");
@@ -94,6 +94,7 @@ export default function Confirmation_Cognito() {
                         name="confirmation_code"
                         value={formState.confirmation_code}
                         error={fieldErrorState.confirmation_code}
+                        autoFocus
                     // required  // make a '*' to indicate it is a mandatory field
                     />
                     <Button

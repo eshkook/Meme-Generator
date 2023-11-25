@@ -164,6 +164,7 @@ export default function SignUp_Cognito() {
                         value={formState.email}
                         error={fieldErrorState.email}
                         required  // make a '*' to indicate it is a mandatory field
+                        autoFocus
                     />
                     <TextField
                         onChange={updateFormState}

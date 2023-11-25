@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
 import { login_cognito_post } from "../api/posts.js";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -13,6 +13,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function Login_Cognito() {
+
+    const location = useLocation()
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -119,6 +121,15 @@ export default function Login_Cognito() {
 
     return (
         <>
+            {(location.state && location.state.just_confirmed_email)  && (
+                <>
+                    <Typography variant="body1">
+                        Confirmation was successful, now you can log in!
+                    </Typography>
+                    <br />
+                </>
+            )}
+
             <Typography variant="subtitle1" component="h1">
                 Log in:
             </Typography>
@@ -146,6 +157,7 @@ export default function Login_Cognito() {
                         name="email"
                         value={formState.email}
                         error={fieldErrorState.email}
+                        autoFocus
                     // required  // make a '*' to indicate it is a mandatory field
                     />
                     <TextField
