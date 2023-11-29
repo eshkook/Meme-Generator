@@ -1,20 +1,64 @@
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Typography from '@mui/material/Typography'
-import { logout_post, post_response_count, get_random } from "../api/posts.js";
+import { delete_cognito_post, logout_cognito_post } from "../api/posts.js";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { useEffect } from "react";
-import axios from 'axios';
+import { useMutation } from "@tanstack/react-query"
 
 export default function You_are_logged_Cognito() {
+
+    const [errorMessage, setErrorMessage] = useState(null);
+    const navigate = useNavigate()
+
+    const logoutMutation = useMutation({
+        mutationFn: logout_cognito_post,
+        onSuccess: data => {
+            // navigate("/login_cognito") //, { state: { } });
+            console.log("logout success")
+        },
+        onError: error => {
+            setErrorMessage(error.message || "An error occurred");
+            console.log(error.message || "An error occurred")
+        }
+    });
+
+    const deleteMutation = useMutation({
+        mutationFn: delete_cognito_post,
+        onSuccess: data => {
+            // navigate("/signup_post") //, { state: { } });
+            console.log("delete success")
+        },
+        onError: error => {
+            setErrorMessage(error.message || "An error occurred");
+            console.log(error.message || "An error occurred")
+        }
+    });
+
+    function handleLogout(event) {
+        event.preventDefault() // preventing re-rendering the page
+        logoutMutation.mutate()
+    }
+
+    function handleDelete(event) {
+        event.preventDefault() // preventing re-rendering the page
+        deleteMutation.mutate()
+    }
 
     return (
         <>
             <Typography variant="subtitle1" component="h1">
-                You are logged!
+                Welcome to Home page!
             </Typography>
+
+            {errorMessage && (
+                <>
+                    <Typography variant="body2" color="error">
+                        {errorMessage}
+                    </Typography>
+                    <br />
+                </>
+            )}
+
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button>Logout</Button>
                 <Button>Delete Account</Button>
