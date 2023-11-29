@@ -5,9 +5,9 @@ export function login_validation_post() {
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
     credentials: 'include', // Include credentials in the request
     body: JSON.stringify({
       action: 'login_validation',
