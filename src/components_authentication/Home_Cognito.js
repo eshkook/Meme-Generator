@@ -3,7 +3,9 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Typography from '@mui/material/Typography'
 import { delete_cognito_post, logout_cognito_post } from "../api/posts.js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function You_are_logged_Cognito() {
 
@@ -55,15 +57,17 @@ export default function You_are_logged_Cognito() {
                     color="primary"
                     onClick={() => logoutMutation.mutate()}
                     style={{ marginRight: '10px' }}
+                    disabled={logoutMutation.isLoading}
                 >
-                    Logout
+                    {deleteMutation.isLoading ? <CircularProgress size={24} /> : "Logout"}
                 </Button>
                 <Button
                     variant="contained"
                     color="secondary"
                     onClick={() => deleteMutation.mutate()}
+                    disabled={deleteMutation.isLoading}
                 >
-                    Delete Account
+                    {deleteMutation.isLoading ? <CircularProgress size={24} /> : "Delete Account"}
                 </Button>
             </ButtonGroup>
         </>
