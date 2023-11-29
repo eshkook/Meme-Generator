@@ -15,6 +15,10 @@ export default function You_are_logged_Cognito() {
             <Typography variant="subtitle1" component="h1">
                 You are logged!
             </Typography>
+            <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                <Button>Logout</Button>
+                <Button>Delete Account</Button>
+            </ButtonGroup>
         </>
     )
 }
