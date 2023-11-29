@@ -1,6 +1,34 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+export function delete_cognito_post() {
+
+  return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
+    method: 'POST',
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
+    credentials: 'include', // Include credentials in the request
+    body: JSON.stringify({
+      action: 'delete',
+    })
+  })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(err => {
+          throw new Error((err.message) ? ("Response not ok. " + err.message) : "Response not ok.");
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      return new Error(error.message || "An error occurred during the delete process.");
+    });
+}
+
 export function logout_cognito_post() {
 
   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
@@ -28,34 +56,6 @@ export function logout_cognito_post() {
       return new Error(error.message || "An error occurred during the logout process.");
     });
 }
-
-// export function login_validation_post() {
-
-//   return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
-//     method: 'POST',
-//     // headers: {
-//     //   'Content-Type': 'application/json',
-//     // },
-//     credentials: 'include', // Include credentials in the request
-//     body: JSON.stringify({
-//       action: 'logout',
-//     })
-//   })
-//     .then(response => {
-//       if (!response.ok) {
-//         return response.json().then(err => {
-//           throw new Error((err.message) ? ("Response not ok. " + err.message) : "Response not ok.");
-//         });
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       return data;
-//     })
-//     .catch(error => {
-//       return new Error(error.message || "An error occurred during the login validation process.");
-//     });
-// }
 
 export function signup_cognito_post({ email, password }) {
   // console.log('signup_cognito_post called with:', { email, password });
