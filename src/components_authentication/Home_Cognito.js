@@ -25,7 +25,7 @@ export default function You_are_logged_Cognito() {
     const deleteMutation = useMutation({
         mutationFn: delete_cognito_post,
         onSuccess: data => {
-            // navigate("/signup_post") //, { state: { } });
+            // navigate("/signup_cognito") //, { state: { } });
             console.log("delete success")
         },
         onError: error => {
@@ -33,16 +33,6 @@ export default function You_are_logged_Cognito() {
             console.log(error.message || "An error occurred")
         }
     });
-
-    function handleLogout(event) {
-        event.preventDefault() // preventing re-rendering the page
-        logoutMutation.mutate()
-    }
-
-    function handleDelete(event) {
-        event.preventDefault() // preventing re-rendering the page
-        deleteMutation.mutate()
-    }
 
     return (
         <>
@@ -60,8 +50,21 @@ export default function You_are_logged_Cognito() {
             )}
 
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                <Button>Logout</Button>
-                <Button>Delete Account</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => logoutMutation.mutate()}
+                    style={{ marginRight: '10px' }}
+                >
+                    Logout
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => deleteMutation.mutate()}
+                >
+                    Delete Account
+                </Button>
             </ButtonGroup>
         </>
     )
