@@ -1,6 +1,34 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+export function login_validation_post() {
+
+  return fetch("https://efrq1qlgad.execute-api.eu-west-1.amazonaws.com/backend_function", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include', // Include credentials in the request
+    body: JSON.stringify({
+      action: 'login_validation',
+    })
+  })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(err => {
+          throw new Error((err.message) ? ("Response not ok. " + err.message) : "Response not ok.");
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      return new Error(error.message || "An error occurred during the login validation process.");
+    });
+}
+
 export function signup_cognito_post({ email, password }) {
   // console.log('signup_cognito_post called with:', { email, password });
 
@@ -12,22 +40,22 @@ export function signup_cognito_post({ email, password }) {
       password: password,
     })
   })
-  .then(response => {
-    if (!response.ok) {
-      // First, parse the response as JSON
-      return response.json().then(err => {
-        throw new Error((err.message) ? ("Response not ok. " +  err.message) : "Response not ok.");
-      });
-    }
-    return response.json();
-  })
-  .then(data => {
-    // This is your JSON data
-    return data;
-  })
-  .catch(error => {
-    return new Error(error.message || "An error occurred during the signup process.");
-  });
+    .then(response => {
+      if (!response.ok) {
+        // First, parse the response as JSON
+        return response.json().then(err => {
+          throw new Error((err.message) ? ("Response not ok. " + err.message) : "Response not ok.");
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      // This is your JSON data
+      return data;
+    })
+    .catch(error => {
+      return new Error(error.message || "An error occurred during the signup process.");
+    });
 }
 
 // export function signup_cognito_post({ email, password }) {
@@ -72,22 +100,22 @@ export function confirmation_post({ email, confirmation_code }) {
       confirmation_code: confirmation_code
     })
   })
-  .then(response => {
-    if (!response.ok) {
-      // First, parse the response as JSON
-      return response.json().then(err => {
-        throw new Error((err.message) ? ("Response not ok. " +  err.message) : "Response not ok.");
-      });
-    }
-    return response.json();
-  })
-  .then(data => {
-    // This is your JSON data
-    return data;
-  })
-  .catch(error => {
-    return new Error(error.message || "An error occurred during the confirmation process.");
-  });
+    .then(response => {
+      if (!response.ok) {
+        // First, parse the response as JSON
+        return response.json().then(err => {
+          throw new Error((err.message) ? ("Response not ok. " + err.message) : "Response not ok.");
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      // This is your JSON data
+      return data;
+    })
+    .catch(error => {
+      return new Error(error.message || "An error occurred during the confirmation process.");
+    });
 }
 
 // export function confirmation_post({ email, confirmation_code }) {
@@ -133,22 +161,22 @@ export function login_cognito_post({ email, password }) {
       password: password,
     })
   })
-  .then(response => {
-    if (!response.ok) {
-      // First, parse the response as JSON
-      return response.json().then(err => {
-        throw new Error((err.message) ? ("Response not ok. " +  err.message) : "Response not ok.");
-      });
-    }
-    return response.json();
-  })
-  .then(data => {
-    // This is your JSON data
-    return data;
-  })
-  .catch(error => {
-    return new Error(error.message || "An error occurred during the login process.");
-  });
+    .then(response => {
+      if (!response.ok) {
+        // First, parse the response as JSON
+        return response.json().then(err => {
+          throw new Error((err.message) ? ("Response not ok. " + err.message) : "Response not ok.");
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      // This is your JSON data
+      return data;
+    })
+    .catch(error => {
+      return new Error(error.message || "An error occurred during the login process.");
+    });
 }
 
 // export function signup_cognito_post({ username, password, hobbies, age }) {
