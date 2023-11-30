@@ -32,8 +32,8 @@ export default function Login_Cognito() {
     const loginMutation = useMutation({
         mutationFn: login_cognito_post,
         onSuccess: data => {
-            // navigate("/home_cognito") //, { state: { } });
-            console.log("success")
+            navigate("/home_cognito") //, { state: { } });
+            // console.log("success")
         },
         onError: error => {
             setErrorMessage(error.message || "An error occurred");

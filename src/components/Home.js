@@ -84,6 +84,7 @@ export default function Home() {
       <button onClick={() => setCurrentPage(<Real_Estate />)}>
         Real estate
       </button>
+      <br />
       {currentPage}
     </div>
   )

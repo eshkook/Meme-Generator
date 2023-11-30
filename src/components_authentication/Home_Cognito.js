@@ -15,7 +15,7 @@ export default function You_are_logged_Cognito() {
     const logoutMutation = useMutation({
         mutationFn: logout_cognito_post,
         onSuccess: data => {
-            // navigate("/login_cognito") //, { state: { } });
+            navigate("/login_cognito") //, { state: { } });
             console.log("logout success")
         },
         onError: error => {
@@ -41,6 +41,7 @@ export default function You_are_logged_Cognito() {
             <Typography variant="subtitle1" component="h1">
                 Welcome to Home page!
             </Typography>
+            <br />
 
             {errorMessage && (
                 <>
@@ -53,7 +54,6 @@ export default function You_are_logged_Cognito() {
 
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button
-                    variant="contained"
                     color="primary"
                     onClick={() => logoutMutation.mutate()}
                     style={{ marginRight: '10px' }}
@@ -62,7 +62,6 @@ export default function You_are_logged_Cognito() {
                     {deleteMutation.isLoading ? <CircularProgress size={24} /> : "Logout"}
                 </Button>
                 <Button
-                    variant="contained"
                     color="secondary"
                     onClick={() => deleteMutation.mutate()}
                     disabled={deleteMutation.isLoading}
