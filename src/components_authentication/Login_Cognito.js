@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
 import { login_cognito_post } from "../api/posts.js";
+import { isValidPassword, isValidEmail } from "./Validations.js";
 import { useNavigate, useLocation } from "react-router-dom"
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
@@ -57,46 +58,6 @@ export default function Login_Cognito() {
             ...prevFormState,
             [name]: value
         }))
-    }
-
-    // # Password minimum length
-    // # 8 character(s)
-    // # Password requirements
-    // # Contains at least 1 number
-    // # Contains at least 1 special character
-    // # Contains at least 1 uppercase letter
-    // # Contains at least 1 lowercase letter
-    // # Temporary passwords set by administrators expire in
-    // # 7 day(s)
-
-    function isValidPassword(password) {
-        const minLength = 8;
-        const hasNumber = /[0-9]/;
-        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
-        const hasUpperCase = /[A-Z]/;
-        const hasLowerCase = /[a-z]/;
-
-        if (password.length < minLength) {
-            return false;
-        }
-        if (!hasNumber.test(password)) {
-            return false;
-        }
-        if (!hasSpecialChar.test(password)) {
-            return false;
-        }
-        if (!hasUpperCase.test(password)) {
-            return false;
-        }
-        if (!hasLowerCase.test(password)) {
-            return false;
-        }
-        return true;
-    }
-
-    function isValidEmail(email) {
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        return emailPattern.test(email);
     }
 
     function handleSubmit(event) {

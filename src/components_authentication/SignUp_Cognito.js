@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react"
 import { signup_cognito_post } from "../api/posts.js";
 import { useNavigate } from "react-router-dom"
-
+import { isValidPassword, isValidEmail } from "./Validations.js";
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -15,21 +15,14 @@ import CircularProgress from '@mui/material/CircularProgress';
 export default function SignUp_Cognito() {
 
     const [showPassword, setShowPassword] = useState(false);
-    // const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
     const handleClickShowPassword = () => {
         setShowPassword(showPassword => (!showPassword));
     };
-    // const handleClickShowPasswordConfirmation = () => {
-    //     setShowPasswordConfirmation(showPasswordConfirmation => (!showPasswordConfirmation));
-    // };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    // const handleMouseDownPasswordConfirmation = (event) => {
-    //     event.preventDefault();
-    // };
 
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -69,46 +62,6 @@ export default function SignUp_Cognito() {
             ...prevFormState,
             [name]: value
         }))
-    }
-
-    // # Password minimum length
-    // # 8 character(s)
-    // # Password requirements
-    // # Contains at least 1 number
-    // # Contains at least 1 special character
-    // # Contains at least 1 uppercase letter
-    // # Contains at least 1 lowercase letter
-    // # Temporary passwords set by administrators expire in
-    // # 7 day(s)
-
-    function isValidPassword(password) {
-        const minLength = 8;
-        const hasNumber = /[0-9]/;
-        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
-        const hasUpperCase = /[A-Z]/;
-        const hasLowerCase = /[a-z]/;
-
-        if (password.length < minLength) {
-            return false;
-        }
-        if (!hasNumber.test(password)) {
-            return false;
-        }
-        if (!hasSpecialChar.test(password)) {
-            return false;
-        }
-        if (!hasUpperCase.test(password)) {
-            return false;
-        }
-        if (!hasLowerCase.test(password)) {
-            return false;
-        }
-        return true;
-    }
-
-    function isValidEmail(email) {
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        return emailPattern.test(email);
     }
 
     function handleSubmit(event) {
@@ -179,7 +132,7 @@ export default function SignUp_Cognito() {
                         type={showPassword ? 'text' : 'password'}
                         value={formState.password}
                         error={fieldErrorState.password}
-                        required  // make a '*' to indicate it is a mandatory field
+                        required  // adds a '*' to indicate it is a mandatory field
                         InputProps={{ // <-- This is the part that adds the toggle button
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -207,7 +160,7 @@ export default function SignUp_Cognito() {
                         type={showPassword ? 'text' : 'password'}
                         value={formState.password_confirmation}
                         error={fieldErrorState.password_confirmation}
-                        required  // make a '*' to indicate it is a mandatory field
+                        required  // adds a '*' to indicate it is a mandatory field
                         InputProps={{ // <-- This is the part that adds the toggle button
                             endAdornment: (
                                 <InputAdornment position="end">
