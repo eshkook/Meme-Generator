@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function You_are_logged_Cognito() {
+export default function Home_Cognito() {
 
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate()
